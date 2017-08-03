@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<!--<html manifest="../../lastmiledata.appcache">-->
+<html>
+    
+    <head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name='robots' content='noindex'>
+        
+        <title>Last Mile Data</title>
+        
+        <link rel='icon' type='image/png' href='../images/logo_flag_color.png'>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../css/page_deqa.css"  type="text/css" />
+        
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/loadContents.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/page_deqa.js"></script>
+        
+    </head>
+    
+    <body style="display:none">
+        
+        <div id="load_navbar"></div>
+        
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Liberia MOH: NCHA Supervision</h1>
+                <p>This page is meant to be used by Liberia County Health Team staff to perform data entry of the Integrated CHSD/DEOH/NHPD Supervision Tools. This page can be accessed offline when no internet connection is present.</p>
+                <h4><b id='appVersion'>&nbsp;</b></h4>
+            </div>
+            
+            <!-- Current forms -->
+            <div id="currentVersions_div" class="row">
+                <div class="col-md-4" id="QA_forms">
+                    <h2>Forms + Tools</h2>
+                    <p>Download the latest forms and tools.</p>
+                    
+                    <p><a id="qa_MSR_0501" href="#" class="btn btn-primary">Integrated Supervision Tool: Community</a></p>
+                    <p><a id="qa_MSR_0501" href="#" class="btn btn-primary">Integrated Supervision Tool: Facility</a></p>
+                    <p><a id="qa_MSR_0501" href="#" class="btn btn-primary">Integrated Supervision Tool Instructions: Community</a></p>
+                    <p><a id="qa_MSR_0501" href="#" class="btn btn-primary">Integrated Supervision Tool Instructions: Facility</a></p>
+                    <p><a id="qa_MSR_0501" href="#" class="btn btn-primary">Community Tool Annex</a></p>
+                    
+                </div>
+                <div class="col-md-4" id="DE_forms">
+                    <h2>Data Entry / QA</h2>
+                    <p>Perform data entry and data quality assurance.</p>
+                    <p><a href="../forms/integrated_chsd_deoh_nhpd_supervision_tool_community.html" class="btn btn-danger">DATA ENTRY: Community Supervision Tool</a></p>
+                    <p><a href="../forms/integrated_chsd_deoh_nhpd_supervision_tool_facility.html" class="btn btn-danger">DATA ENTRY: Facility Supervision Tool</a></p>
+                    <p><a id="qa_community"  href="#" class="btn btn-danger">QUALITY ASSURANCE: Community Supervision Tool</a></p>
+                    <p><a id="qa_facility"  href="#" class="btn btn-danger">QUALITY ASSURANCE: Facility Supervision Tool</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Data Management</h2>
+                    <p>To be used to manage and send completed data.</p>
+                    <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#modal_sendRecords" title="Send records to the central MOH Database. Requires an active internet connection.">Send Records</a></p>
+                    <p><a href="tool_viewLocalRecords.html" class="btn btn-default" title="View all locally-stored records.">View local records</a></p>
+                    <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#modal_deleteRecords" title="Delete all locally-stored records.">Delete local records</a></p>
+                </div>
+            </div>
+            
+            <!-- MODAL START: "APPCACHE REFRESH" -->
+            <div id="modal_appcacheRefresh" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="text-center">Refreshing Application</h1>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group text-center">
+                                <img src="../images/ajax_loader.gif">
+                                <h3 id="modal_appcacheRefresh_text">A new version of the Last Mile Data application is available. Downloading files now...</h3>
+                                <div id="modal_appcacheRefresh_progress"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MODAL END: "APPCACHE REFRESH" -->
+
+
+        
+            <!-- MODAL START: "SEND RECORDS" -->
+            <div id="modal_sendRecords" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="text-center">Send Records</h1>
+                        </div>
+                        <div class="modal-body">
+
+                            <div id="modal_sendRecords_ajaxLoadIcon" class="center-block text-center">
+                                <img src='../images/ajax_loader.gif'>
+                                <br><br>
+                            </div>
+
+                            <div id="modal_sendRecords_ajaxInner"></div>
+
+                            <div class="text-center">
+                                <h3 id="modal_sendRecords_text">Are you sure you want to send all<br>current records to the database?<br><br></h3>
+                                <div id='modal_sendRecords_buttons'>
+                                    <a id="modal_sendRecords_submit" class="btn btn-primary btn-lg">Yes, send records</a>
+                                    &nbsp;
+                                    <button class="btn btn-primary btn-lg" data-dismiss="modal">No, go back</button>
+                                </div>
+                            </div>
+
+                            <div id="modal_sendRecords_close">
+                                <button class="btn btn-primary btn-lg" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MODAL END: "SEND RECORDS" -->
+
+
+
+            <!-- MODAL START: "DELETE RECORDS" -->
+            <div id="modal_deleteRecords" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="text-center">Delete All Records</h1>
+                        </div>
+                        <div class="modal-body">
+
+                            <div id="modal_deleteRecords_ajaxInner"></div>
+
+                            <div class="text-center">
+                                <h3 id="modal_deleteRecords_text">Are you sure you want to<br>delete all current records?<br><br></h3>
+                                <div>Enter password: <input class="input-sm" id="deletePassword"><br><br></div>
+                                <div id='modal_deleteRecords_buttons'>
+                                    <a id="modal_deleteRecords_submit" class="btn btn-primary btn-lg">Yes, delete all records</a>
+                                    &nbsp;
+                                    <button class="btn btn-primary btn-lg" data-dismiss="modal">No, go back</button>
+                                </div>
+                            </div>
+
+                            <div id="modal_sendRecords_close">
+                                <button class="btn btn-primary btn-lg" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MODAL END: "DELETE RECORDS" -->
+
+
+
+            <!-- MODAL START: "QUALITY ASSURANCE" -->
+            <!-- !!!!! fix all of these IDs to match standard prefixed format !!!!! -->
+            <div id="modal_QA" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h1 class="text-center">Quality Assurance</h1>
+                        </div>
+                        <div class="modal-body">
+                            <h3 id="qaFormName" class="text-center">Form name</h3>
+                            <form class="form col-md-12 center-block">
+                                <h3 class="text-center"></h3>
+                                <div id="modal_QA_pKeyDiv1" class="form-group">
+                                    <label for="modal_QA_pKey1">pKey 1:</label>
+                                    <input id="modal_QA_pKey1" class="form-control input-lg">
+                                </div>
+                                <div id="modal_QA_pKeyDiv2" class="form-group">
+                                    <label for="modal_QA_pKey2">pKey 2:</label>
+                                    <input id="modal_QA_pKey2" class="form-control input-lg">
+                                </div>
+                                <div id="modal_QA_pKeyDiv3" class="form-group">
+                                    <label for="modal_QA_pKey3">pKey 3:</label>
+                                    <input id="modal_QA_pKey3" class="form-control input-lg">
+                                </div>
+                                <div id="modal_QA_pKeyDiv4" class="form-group">
+                                    <label for="modal_QA_pKey4">pKey 4:</label>
+                                    <input id="modal_QA_pKey4" class="form-control input-lg">
+                                </div>
+                                <div id="qaNoMatch" class="form-group" style="display:none">
+                                    <span style="color:red">No match was found in the current record set.</span>
+                                </div>
+                                <div class="form-group">
+                                    <a id="modal_QA_submit" class="btn btn-primary btn-lg btn-block">Submit</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-md-12">
+                                <button class="btn" data-dismiss="modal">Cancel</button>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>        
+            <!-- MODAL END: "QUALITY ASSURANCE" -->
+
+        </div>
+
+    </body>
+    
+</html>

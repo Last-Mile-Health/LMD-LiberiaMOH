@@ -1,0 +1,34 @@
+# Note: this file should go in the same directory as the LastMileData folder
+
+# Enable gzipping
+<IfModule mod_deflate.c>
+
+    SetOutputFilter DEFLATE
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/x-httpd-php
+
+</IfModule>
+
+# Enable URL rewriting
+<IfModule mod_rewrite.c>
+
+    RewriteEngine on
+
+    # Redirect lastmiledata.org --> lastmiledata.org/LastMileData/
+    RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+    RewriteRule ^/?$ "https\:\/\/lastmiledata\.org\/LastMileData" [R=301,L]
+
+    # Redirect lastmiledata.org/offline --> DEQA page
+    # !!!!! This doesn't work offline; replace this with a simple (cached) forwarding page !!!!!
+    RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+    RewriteRule ^offline$ "https\:\/\/lastmiledata\.org\/LastMileData\/build\/pages\/page_deqa\.html" [R=301,L]
+
+    # Redirect lastmiledata.org/portal --> DEQA page
+    RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+    RewriteRule ^portal$ "https\:\/\/lastmiledata\.org\/LastMileData\/build\/pages\/page_dataPortal\.php" [R=301,L]
+
+    # Redirect all HTTP requests to HTTPS
+    RewriteCond %{SERVER_PORT} !=443
+    RewriteCond %{HTTP_HOST} ^(www\.)?lastmiledata\.org$ [NC]
+    RewriteRule ^$ https://www.lastmiledata.org/%{REQUEST_URI} [R,L]
+
+</IfModule>
