@@ -46,3 +46,14 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /nbproject/private/
+
+# User-ignored files
+nbproject/private/private.xml
+backups
+build
+node_modules
+.tmp
+npm-debug.log
+lmdliberiamoh.appcache
+lmdliberiamoh.appcache
+lmdliberiamoh.appcache
