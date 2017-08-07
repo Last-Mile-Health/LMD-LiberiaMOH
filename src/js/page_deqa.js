@@ -27,9 +27,6 @@ $(document).ready(function(){
         console.log($('#deletePassword').val());
         if ($('#deletePassword').val() == 112358) {
             LMD_fileSystemHelper.deleteFile('data.lmd');
-//            LMD_fileSystemHelper.deleteFile('data.lmd', function(){
-//                LMD_fileSystemHelper.createOrOverwriteFile('data.lmd',"{}");
-//            });
             setTimeout(function(){
                 alert('File successfully deleted.');
                 location.reload();
