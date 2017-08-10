@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name='robots' content='noindex'>
-        <title>LMD-LiberiaMOH</title>
+        <title>LMD Liberia MOH</title>
         <link rel="stylesheet" href="lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
         <link rel="stylesheet" href="lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
         <script src="lib/jquery.min.js"></script>

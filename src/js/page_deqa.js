@@ -306,7 +306,7 @@ function sendRecordsAJAX(){
                     // Send AJAX request
                     $.ajax({
                         type: "POST",
-                        url: "/LMD-LiberiaMOH/php/scripts/ajaxSendQuery.php",
+                        url: "/LMDLiberiaMOH/php/scripts/ajaxSendQuery.php",
                         data: myData,
                         dataType: "json",
                         success: function(data) {
