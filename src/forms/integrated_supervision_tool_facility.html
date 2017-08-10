@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+     
+        <title>Integrated CHSD / DEOH / NHPD Supervision Tool - Health Facility (v0.20)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name='robots' content='noindex'>
+        <link rel='icon' type='image/png' href='../images/lmd_icon.png'>
+        <script src="../../lib/jquery.min.js"></script>
+        <script src="../../lib/jquery-ui-1.11.1/jquery-ui.min.js"></script>
+        <script src="../../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+        <script src="../js/LMD_fileSystemHelper.js"></script>
+        <script src="../js/fhwForms.js"></script>
+        <script src="../js/LMD_utilities.js"></script>
+        <script src="../js/formHelper.js"></script>
+        <script src="../js/formValidate.js"></script>
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"  type="text/css" />
+        <link rel="stylesheet" href="../../lib/jquery-ui-1.11.1/jquery-ui.min.css"  type="text/css" />
+        <link rel='stylesheet' type='text/css' media='all' href='../css/fhwForms.css'> <!-- Stylesheet specific to forms; must come after bootstrap stylesheet to override -->
+        
+        <style>
+            
+            #meBox { position:relative; top:-5px; }
+          
+            .table_community_engagement     { font-size: 100%; margin: 1px; padding: 1px; border-collapse: collapse; }
+            .table_community_engagement td  { border: 1px solid black; padding: 1px; }
+            
+            .column_1_community_engagement  { width:0.30in; border:none; margin-right:1px; margin-left:1px; text-align: left; }
+            .column_2_community_engagement  { width:6.65in; border:none; margin-right:1px; margin-left:1px; text-align: left; }
+            .column_3_community_engagement  { width:0.30in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+                 
+            .table_supply_chain     { width: 7.25in; font-size: 100%; margin: 1px; padding: 1px; border-collapse: collapse; }
+            .table_supply_chain th  { border: 1px solid black; padding: 3px; text-align: left; }
+            .table_supply_chain td  { border: 1px solid black; padding: 1px; }
+            
+            .column_1_supply_chain  { width: 0.30in; border:none; margin-right:1px; margin-left:1px; text-align: right;  }
+            .column_2_supply_chain  { width: 3.45in; border:none; margin-right:1px; margin-left:1px; text-align: left;   }
+            .column_3_supply_chain  { width: 0.30in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_4_supply_chain  { width: 0.70in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_5_supply_chain  { width: 0.90in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_6_supply_chain  { width: 0.35in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_7_supply_chain  { width: 0.35in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_8_supply_chain  { width: 0.45in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_9_supply_chain  { width: 0.45in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+ 
+            
+            .table_supervision     { font-size: 100%; margin: 1px; padding: 1px; border-collapse: collapse; }
+            .table_supervision td  { border: 1px solid black; padding: 2px; }
+            
+            .column_1_supervision   { width:6.95in; border:none; margin-right:1px; margin-left:1px; text-align: left; }
+            .column_2_supervision   { width:0.30in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            
+            
+            .table_generic     { width: 7.25in; margin: 1px; padding: 1px; border-collapse: collapse; }
+            .table_generic td  { border: 1px solid black; padding: 2px; }
+                       
+            .column_1_row_two_char  { width:6.95in; border: none; margin-right: 1px; margin-left:1px; text-align: left; }
+            .column_2_row_two_char  { width:0.30in; border: none; margin-right: 1px; margin-left:1px; text-align: center; }
+                
+            .column_1_row_question_y_n  { width:6.95in; border: none; margin-right:1px; margin-left:1px; text-align: left; }
+            .column_2_row_question_y_n  { width:0.30in; border: none; margin-right:1px; margin-left:1px; text-align: center; }
+            
+            /* Question/Month/Day/Year formatted row */
+            
+            /* Question */
+            .column_1_row_question_month_day_year { width: 4.04in; border:none; margin-right:1px; margin-left:1px; text-align: left;   }
+           
+            /* Month */
+            .column_2_row_question_month_day_year { width: 0.65in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_3_row_question_month_day_year { width: 0.90in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            
+            /* Day */
+            .column_4_row_question_month_day_year { width: 0.35in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_5_row_question_month_day_year { width: 0.35in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            
+            /* Year */
+            .column_6_row_question_month_day_year { width: 0.45in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            .column_7_row_question_month_day_year { width: 0.45in; border:none; margin-right:1px; margin-left:1px; text-align: center; }
+            
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <!-- START: VALIDATION BOX -->
+        <div id="validationBox"></div>
+        <!-- END: VALIDATION BOX -->
+        
+        <!-- START: PAGE 1 -->
+        <div class="page">
+            
+            <!-- START: FORM HEADER -->
+            <div class="formHeader" >
+                
+                <img style="float:left" src="../images/logo_liberia.png">
+                <span class="h4" style="font-size: 145%;" >Integrated CHSD / DEOH / NHPD Supervision Tool - Health Facility</span>
+                <span class="blackBox" style="float: right; ">v0.20</span>
+        
+            </div>
+            
+            <!-- Create white space. -->
+            <div style="height:5px"></div>
+            
+            <div class="thickBox" style="border: none; ">
+                          
+            <!-- First header row -->
+                <div class="headField" style="width:0.50in">County</div>
+                <div class="headField" style="width:1.50in; "><input class="stored" name="county" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Bomi","Bong","Gbarpolu","Grand Bassa","Grand Cape Mount","Grand Gedeh","Grand Kru","Lofa","Margibi","Maryland","Montserrado","Nimba","River Gee","Rivercess","Sinoe"]' style="width:1.45in; border: 2px solid black; padding: 1px; " ></div>
+
+                <div class="headField" style="width:0.70in">H. District</div>
+                <div class="headField" style="width:1.50in; "><input class="stored" name="health_district" data-lmd-valid-required style="width:1.45in; border: 2px solid black; padding: 1px; " ></div>
+         
+                <div class="headField" style="width:1.00in">Health Facility</div>
+                <div class="headField" style="width:2.05in; "><input class="stored" name="facility" data-lmd-valid-required style="width:2.00in; border: 2px solid black; padding: 1px;  " ></div>
+                                       
+                <div style="clear:both; height:3px;"></div>
+                
+             <!-- Second header row -->
+                <div class="headField" style="width:0.50in">Month</div>
+                <div class="headField" style="width:1.00in; "><input class="stored" name="month_complete" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="width:0.90in; border: 2px solid black; padding: 1px; " ></div>
+
+                <div class="headField" style="width:0.30in">Day</div>
+                <div class="headField" style="width:0.40in; "><input class="stored" name="day_complete" data-lmd-valid-required data-lmd-valid-intMin="1" data-lmd-valid-intMax="31" style="width:0.30in; text-align: center; border: 2px solid black; padding: 1px; " ></div>
+         
+                <div class="headField" style="width:0.40in">Year</div>
+                <div class="headField" style="width:0.60in; "><input class="stored" name="year_complete" data-lmd-valid-required data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030"  style="width:0.50in; text-align: center; border: 2px solid black; padding: 1px; " ></div>
+ 
+                <div class="headField" style="width:0.70in">CHSS ID</div>
+                <div class="headField" style="width:1.35in; "><input class="stored" name="chss_id"    data-lmd-valid-required style="width:1.35in; border: 2px solid black; padding: 1px; " ></div>
+                              
+                <div style="clear:both; height:3px;"></div>
+                
+             <!-- Third header row -->
+             
+                <div class="headField" style="width:0.50in">CHSS</div>
+                <div class="headField" style="width:1.90in; "><input class="stored" name="chss"           data-lmd-valid-required style="width:1.80in; border: 2px solid black; padding: 1px; " ></div>
+ 
+                <div class="headField" style="width:0.75in">Sex (M/F)</div>
+                <div class="headField" style="width:0.45in; "><input class="stored" name="chss_gender" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["M","m","F","f"]' style="width:0.40in; text-align: center; border: 2px solid black; padding: 1px; " ></div>
+
+                <div class="headField" style="width:0.50in">OIC</div>
+                <div class="headField" style="width:1.95in; "><input class="stored" name="oic"            data-lmd-valid-required style="width:1.80in; border: 2px solid black; padding: 1px; " ></div>
+
+                <div class="headField" style="width:0.75in">Sex (M/F)</div>
+                <div class="headField" style="width:0.45in; "><input class="stored" name="oic_gender" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["M","m","F","f"]' style="width:0.40in; text-align: center; border: 2px solid black; padding: 1px; " ></div>
+         
+
+                <div style="clear:both; height:3px;"></div>
+                
+              <!-- Fourth header row -->
+                <div class="headField" style="width:1.60in">Data Collector Name</div>
+                <div class="headField" style="width:2.00in; "><input class="stored" name="data_collector_name"        data-lmd-valid-required style="width:1.90in; border: 2px solid black; padding: 1px; " ></div>
+
+                <div class="headField" style="width:1.60in">Data Collector Position</div>
+                <div class="headField" style="width:2.05in; "><input class="stored" name="data_collector_position"    data-lmd-valid-required style="width:2.00in; border: 2px solid black; padding: 1px; " ></div>
+         
+                <div style="clear:both; height:3px;"></div>
+
+                <!-- Fifth header row -->
+                <div class="headField" style="width:1.60in">Supervision Start Time</div>
+                <div class="headField" style="width:2.00in; "><input class="stored" name="supervision_time_start" data-lmd-valid-required style="width:1.90in; border: 2px solid black; padding: 1px; " ></div>
+
+                <div class="headField" style="width:1.60in">Supervision End Time</div>
+                <div class="headField" style="width:2.05in; "><input class="stored" name="supervision_time_end"   data-lmd-valid-required style="width:2.00in; border: 2px solid black; padding: 1px; " ></div>
+                        
+            </div>
+            <!-- END: FORM HEADER -->
+                
+            <!-- START: SECTION A -->
+            
+            <!-- SECTION A Black banner -->
+            <div style="background-color: black; color: white; font-weight: bold; font-size: 110%; " >SECTION A</div>
+             
+            <!-- Create white space between black and gray banners. -->
+            <div style="height:5px"></div>
+            
+            <!-- 1. Community Engagement Gray Banner -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">1. Community Engagement</span>
+                <br>
+                <span style="font-style: italic; font-size: 90%; ">Ask the CHSS these questions.</span>
+            </div>
+                      
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+                       
+            <div>
+                              
+                <!-- START: 1. Community engagement table -->
+                <div>
+                    
+                    <table class="table_generic">
+                        <tr>
+                            <td class="column_1_row_two_char" >1.1) How many meetings with the HFDC and CHSSs have taken place in the last quarter?</td>                     
+                            <td class="column_2_row_two_char" style="border: 2px solid black; " ><input class="stored" name="1_1_community_engagement_number_meet_hfdc_chsss" data-lmd-valid-required data-lmd-valid-intMin="0" style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="column_1_row_question_y_n" ><span>1.2) Are there documented meeting minutes for review?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                            <td class="column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="1_2_community_engagement_documented_meeting_minutes" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                        
+                        </tr>                    
+                          
+                        <tr>
+                            <td class="column_1_row_question_y_n" ><span>1.3) Are stakeholders (educators, women's groups, town chiefs, youth groups, etc.) in your catchment aware of the Community Health Programs?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                            <td class="column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="1_3_community_engagement_stakeholder_aware_community_health_program" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                        </tr>
+                                    
+                    </table>
+                          
+                </div>
+                
+                <!-- End of 1. Community Engagement -->
+            
+                <!-- White line spacers -->
+                <div style="height:5px"></div>
+                          
+                <!-- END: Community engagement table  -->
+             
+            </div>
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+                       
+            <!-- 4. Incentives Gray Banner -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">2. Incentives</span>
+                <br>
+                <span style="font-style: italic; font-size: 90%; text-decoration: underline; ">Find a place to talk with the CHSS in private, just the two of you.</span>
+            </div>
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+            
+            <!-- Beginning of the 2. Incentives stacked tables -->
+            <div>
+                <div>
+                
+                    <table class="table_generic">
+                        <tr>
+                            <td class="column_1_row_question_y_n" ><span>2.1) In the last 4 weeks, did you receive the correct salary according to your contract?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                            <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="2_1_incentive_correct_amount" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                        </tr>
+                    
+                        <tr>
+                            <td class="column_1_row_question_y_n" ><span>2.2) In the last 4 weeks, did you receive your salary on time?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                            <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="2_2_incentive_on_time" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                        </tr>
+                    
+                    </table>
+                
+                </div> 
+            
+                <div style="position: relative; top: -3px;">
+                
+                    <table class="table_generic">
+                        <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        <td style="width: 1.80in; border-top: none; " >If NO to 2.1 or 2.2, why?:</td>                     
+                        <td style="width: 5.15in; border: 2px solid black; " ><input class="stored" name="2_incentive_incorrect" style="height: 20px; width: 5.08in; padding: 1px; border: none; text-align: center; " ></td>
+                        </tr>
+                    </table> 
+                
+                </div>
+            
+                <div style="position: relative; top: -7px;">
+                
+                    <table class="table_generic">  
+                        <tr>
+                        <td class="column_1_row_question_month_day_year" >2.3) When did you receive your last payment?</td>
+                        <td class="column_2_row_question_month_day_year" style="text-align: center; " >Month</td> 
+                        <td class="column_3_row_question_month_day_year" style="border: 2px solid black; " ><input class="stored" name="2_3_incentive_payment_month" data-lmd-valid-required data-lmd-valid-restrict      data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.85in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_row_question_month_day_year" style="text-align: center; " >Day</td>
+                        <td class="column_5_row_question_month_day_year" style="border: 2px solid black; " ><input class="stored" name="2_3_incentive_payment_day"   data-lmd-valid-required data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.30in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_6_row_question_month_day_year" style="text-align: center; " >Year</td>
+                        <td class="column_7_row_question_month_day_year" style="border: 2px solid black; " ><input class="stored" name="2_3_incentive_payment_year"  data-lmd-valid-required data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.40in; padding: 1px; border: none; text-align: center; " ></td>                    
+                    </tr>
+                    </table>
+                
+                </div>    
+                                    
+            </div>
+            <!-- End of the 2. Incentives stacked tables -->
+            
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+                       
+            <!-- 2. Supply Chain Gray Banner -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">3. Supply Chain</span>
+                <br>
+                <span style="font-style: italic; font-size: 90%; ">Conduct verification in facility. Answers in this section refer to stock in CHA container & CHSS supplies only.</span>
+            </div>
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+            
+            <div>
+                
+                <!-- START: Supply Chain table -->
+                <div>
+                    <table class="table_generic">
+                        <tr>
+                            <td class="column_1_row_question_y_n" ><span>3.1) Is there a separate locked box/container for CHA drugs and supplies?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                            <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="3_1_supply_chain_locked_box_cha" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                        </tr>                  
+                    </table>                
+                </div> 
+                
+                <div style="position: relative; top: -3px; ">
+                          
+                    <table class="table_supply_chain">
+                    
+                    
+                    <!-- Table header -->
+                        <tr>
+                            <th class="column_1_supply_chain" style="font-weight: normal; text-align: left; " colspan="3">3.2) Does the CHA container have all of the following in stock? Fill in the appropriate bubble. A commodity is in stock if there is at least one of the items in the box (zero items = stock out).</th>
+                            <th class="column_4_supply_chain" style="font-weight: normal; text-align: center; " colspan="6">If no, date when stocked out:</th>                     
+                        </tr>
+                                   
+                    <!-- 3.2.a -->
+                        <tr>
+                            <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                            <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2a) Microlut (OCP)</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30in; border: 2px solid black; " ><input class="stored" name="3_2_a_supply_chain_microlut_ocp_in_stock"        data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_a_supply_chain_microlut_ocp_stock_out_month" data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_a_supply_chain_microlut_ocp_stock_out_day"   data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in; text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in; border: 2px solid black; " ><input class="stored" name="3_2_a_supply_chain_microlut_ocp_stock_out_year"  data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+                                                         
+                    <!-- 3.2.b -->
+                        <tr>
+                            <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                            <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2b) Microgynon (OCP)</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_b_supply_chain_microgynon_ocp_in_stock"            data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_b_supply_chain_microgynon_ocp_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_b_supply_chain_microgynon_ocp_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_b_supply_chain_microgynon_ocp_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+
+                        <!-- 3.2.c -->
+                         <tr>
+                            <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                            <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2c) Male condoms</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_c_supply_chain_male_condom_in_stock"           data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_c_supply_chain_male_condom_stock_out_month"  data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_c_supply_chain_male_condom_stock_out_day"    data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_c_supply_chain_male_condom_stock_out_year"    data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+
+                        <!-- 3.2.d -->
+                         <tr>
+                            <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                            <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2d) Female condoms</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_d_supply_chain_female_condom_in_stock"             data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_d_supply_chain_female_condom_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_d_supply_chain_female_condom_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_d_supply_chain_female_condom_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+
+                        <!-- 3.2.e -->
+                         <tr>
+                            <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                            <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2e) Disposable gloves</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_e_supply_chain_disposable_glove_in_stock"          data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_e_supply_chain_disposable_glove_stock_out_month" data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_e_supply_chain_disposable_glove_stock_out_day"   data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_e_supply_chain_disposable_glove_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+
+      <!-- Split supply chain table up here.  Continue page on 2. -->  
+
+                    </table>
+
+                </div>
+                <!-- END: Supply Chain Table -->
+            </div>
+                
+        </div>
+        <!-- END: PAGE 1 -->
+  
+        <!-- START: PAGE 2 -->
+        <div class="page">
+        
+            <!-- START: Supply Chain Table.  Continued from page 1. -->
+            <div>   
+                <table class="table_supply_chain">
+   
+                     <!-- 3.2.f -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2f) ACT 25/67.5 mg tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="3_2_f_supply_chain_act_25_67_5_mg_tablet_in_stock"          data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="3_2_f_supply_chain_act_25_67_5_mg_tablet_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]'   style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="3_2_f_supply_chain_act_25_67_5_mg_tablet_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="3_2_f_supply_chain_act_25_67_5_mg_tablet_stock_out_year"    data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                                       
+                    <!-- 3.2.g -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2g) ACT 50/135 mg tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_g_supply_chain_act_50_135_mg_tablet_in_stock"          data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_g_supply_chain_act_50_135_mg_tablet_stock_out_month" data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_g_supply_chain_act_50_135_mg_tablet_stock_out_day"   data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_g_supply_chain_act_50_135_mg_tablet_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                    
+                    
+                    
+                    <!-- 3.2.h -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2h) Artesunate 100 mg suppository</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_h_supply_chain_artesunate_100_mg_suppository_in_stock"             data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_h_supply_chain_artesunate_100_mg_suppository_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_h_supply_chain_artesunate_100_mg_suppository_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_h_supply_chain_artesunate_100_mg_suppository_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                    
+                    
+                    
+                    <!-- 3.2.i -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2i) Amoxicillin 250 mg dispersible tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_i_supply_chain_amoxicillin_250_mg_dispersible_tablet_in_stock"             data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_i_supply_chain_amoxicillin_250_mg_dispersible_tablet_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_i_supply_chain_amoxicillin_250_mg_dispersible_tablet_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_i_supply_chain_amoxicillin_250_mg_dispersible_tablet_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                                     
+                    <!-- 3.2.j -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2j) ORS 20.6/1L sachet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_j_supply_chain_ors_20_6_1l_sachet_in_stock"            data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_j_supply_chain_ors_20_6_1l_sachet_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_j_supply_chain_ors_20_6_1l_sachet_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_j_supply_chain_ors_20_6_1l_sachet_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                                       
+                    <!-- 3.2.k -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2k) Zinc sulfate 20 mg scored tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="3_2_k_supply_chain_zinc_sulfate_20_mg_scored_tablet_in_stock"           data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="3_2_k_supply_chain_zinc_sulfate_20_mg_scored_tablet_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="3_2_k_supply_chain_zinc_sulfate_20_mg_scored_tablet_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="3_2_k_supply_chain_zinc_sulfate_20_mg_scored_tablet_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                                       
+                    <!-- 3.2.l -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2l) Paracetamol 100 mg dispersible tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_l_supply_chain_paracetamol_100_mg_dispersible_tablet_in_stock"             data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_l_supply_chain_paracetamol_100_mg_dispersible_tablet_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_l_supply_chain_paracetamol_100_mg_dispersible_tablet_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_l_supply_chain_paracetamol_100_mg_dispersible_tablet_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                                      
+                    <!-- 3.2.m -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2m) MUAC strap</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_m_supply_chain_muac_strap_in_stock"            data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_m_supply_chain_muac_strap_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_m_supply_chain_muac_strap_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_m_supply_chain_muac_strap_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                                       
+                    <!-- 3.2.n -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2n) Dispensing bags</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="3_2_n_supply_chain_dispensing_bag_in_stock"         data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="3_2_n_supply_chain_dispensing_bag_stock_out_month"  data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="3_2_n_supply_chain_dispensing_bag_stock_out_day"    data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="3_2_n_supply_chain_dispensing_bag_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                                       
+                    <!-- 3.2.o -->
+                      <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2o) Safety box</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_o_supply_chain_safety_box_in_stock"            data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_o_supply_chain_safety_box_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_o_supply_chain_safety_box_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_o_supply_chain_safety_box_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                         
+                    <!-- 3.2.p -->
+                     <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2p) Functional ARI Timer</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="3_2_p_supply_chain_functional_art_timer_in_stock"          data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="3_2_p_supply_chain_functional_art_timer_stock_out_month" data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="3_2_p_supply_chain_functional_art_timer_stock_out_day"   data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="3_2_p_supply_chain_functional_art_timer_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                                      
+                    <!-- 3.2.q -->
+                      <tr>
+                        <td class="column_1_supply_chain" style="width: 0.30; border: none; " ></td>
+                        <td class="column_2_supply_chain" style="width: 3.45in;" ><span style="padding-left: 3px; ">3.2q) Rapid diagnostic test</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="3_2_q_supply_chain_rapid_diagnostic_test_in_stock"          data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="3_2_q_supply_chain_rapid_diagnostic_test_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="3_2_q_supply_chain_rapid_diagnostic_test_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="3_2_q_supply_chain_rapid_diagnostic_test_stock_out_year"    data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                    </tr>
+                          
+                </table>
+            </div>
+            
+            <div style="position: relative; top: -4px;">                
+          
+                <table class="table_generic">
+                        <tr>
+                            <td class="column_1_row_question_y_n" ><span>3.3) Does CHSS have his/her CHSS Supervision CBIS form booklet with at least 3 blank forms?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                            <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="3_3_supply_chain_chss_cbis_booklet" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                        </tr>                  
+                </table>                
+            </div> 
+ 
+            <!-- END: Supply Chain Table -->    
+                             
+            <!-- 4. Supervision Gray Banner -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">4. Supervision</span>
+                <br>
+                <span style="font-style: italic; font-size: 90%; ">Ask the CHSS questions 4.1 - 4.3. For question 4.4, confirm with the OIC.</span>
+            </div>
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+            
+            <div>
+
+                <div>
+                    <table class="table_generic">
+                        <tr>
+                            <td class="column_1_row_question_y_n" ><span>4.1) Do you have an updated workplan for the month?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                            <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="4_1_supervision_updated_workplan" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                        </tr>
+                        <tr>
+                            <td class="column_1_row_question_y_n" ><span>4.2) Have you ever NOT been able to conduct supervision as scheduled?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                            <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="4_2_supervision_not_able_conduct" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                        </tr>   
+                    </table>                
+                </div> 
+                
+                <div style="position: relative; top: -3px; ">
+                    
+                    <table class="table_generic">
+                                              
+                        <!-- Table header -->
+                        <tr>
+                            <th style="width: 0.30in; ">
+                            <th style="font-weight: normal;  border: 1px solid black;" colspan="2">4.2b) If YES, please fill in the bubbles for ALL reasons that apply for not being able to conduct supervision as scheduled:</th>                         
+                        </tr>
+                        
+                        <tr>                       
+                            <td style="width: 0.30in; border: none; "></td>                     
+                            <td style="width: 3.48in; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_motorbike_not_equipped" value='1' ><span style="padding-left: 3px; ">Not equipped with motorbike</span></div></td>
+                            <td style="width: 3.47in; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_motorbike_not_functioning" value='1' ><span style="padding-left: 3px; ">Motorbike not functioning</span></div></td>                                                  
+                        </tr>
+
+                        <tr>                       
+                            <td style="border: none; "></td>                     
+                            <td><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_motorbike_unable_ride_alone"   value='1' ><span style="padding-left: 3px; ">Unable to ride motorbike alone</span></div></td>
+                            <td><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_motorbike_no_fuel"             value='1' ><span style="padding-left: 3px; ">No fuel for motorbike</span></div></td>                                                  
+                        </tr>
+
+                        <tr>                       
+                            <td style="border: none; "></td>                     
+                            <td><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_community_too_far" value='1' ><span style="padding-left: 3px; ">Communities are too far away</span></div></td>
+                            <td><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_form_not_enough" value='1' ><span style="padding-left: 3px; ">Not enough forms</span></div></td>                                                  
+                        </tr>
+                        
+                        <tr>                       
+                            <td style="border: none; "></td>                     
+                            <td><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_cha_too_many" value='1' ><span style="padding-left: 3px; ">Too many CHAs</span></div></td>
+                            <td><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_oic_not_available_chss_needed_facility" value='1' ><span style="padding-left: 3px; ">OIC not available/CHSS needed at facility</span></div></td>                                                  
+                        </tr>
+                        
+                        <tr>                       
+                            <td style="border: none; "></td>                     
+                            <td><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_chss_health_status" value='1' ><span style="padding-left: 3px; ">CHSS health status</span></div></td>
+                            <td><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_cha_not_available" value='1' ><span style="padding-left: 3px; ">CHA(s) not available</span></div></td>                                                  
+                        </tr>
+                          
+                    </table>      
+                </div>
+                                    
+                <div style="position: relative; top: -7px; ">                    
+                    <table class="table_generic">                                      
+                        <tr>                       
+                            <td style="width: 0.30in; border: none; "></td>                   
+                            <td style="width: 0.60in; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_2_b_supervision_other_checkbox" value='1' ><span style="padding-left: 3px; ">Other</span></div></td>                           
+                            <td style="width: 6.35in; border: 2px solid black; "><input class="stored" name="4_2_b_supervision_other_reason" style="height: 20px; width: 6.28in; padding: 1px; border: none; text-align: center; " ></td>                                                  
+                        </tr>                                                
+                    </table>                       
+                </div>
+                                           
+                <div style="position: relative; top: -11px;">
+                
+                    <table class="table_generic">
+                        <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        <td style="width: 4.75in; border-top: none; " >4.2c) If you have motorbike problems, how do you conduct supervision?</td>                     
+                        <td style="width: 2.20in; border: 2px solid black; " ><input class="stored" name="4_2_supervision_motorbike_problem_how_coduct" style="height: 20px; width: 2.13in; padding: 1px; border: none; text-align: center; " ></td>
+                        </tr>
+                    </table> 
+                
+                </div>
+                
+                <div style="position: relative; top: -14px;"> 
+                    <table class="table_generic ">
+                        <tr>
+                            <td style="width: 4.00in; border-right: none;" ><span>4.3) Ask the CHSS: Of the last 5 working days, which time did you spend in the community & which time in the facility? Please fill in one or more location.</span></td>
+                            <td style="width: 3.25in; padding: 0px; margin: 0px; border: none;" >
+                                
+                                <table style="width: 3.25in; border: none; " >
+                                    
+                                    <tr>
+                                        <td style="width: 0.85in; border-left: none; "></td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 1</td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 2</td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 3</td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 4</td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 5</td>
+                                    </tr>
+  
+                                    <tr>
+                                        <td style="text-align: right; ">Community</td>
+                                        
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_community_day_1" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_community_day_2" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_community_day_3" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_community_day_4" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_community_day_5" value='1' ></div></td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td style="text-align: right; border-bottom: none; ">Facility</td>
+                                        
+                                        <td style="border-top: none; border-bottom: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_facility_day_1" value='1' ></div></td>                                 
+                                        <td style="border-top: none; border-bottom: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_facility_day_2" value='1' ></div></td>                                 
+                                        <td style="border-top: none; border-bottom: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_facility_day_3" value='1' ></div></td>                                 
+                                        <td style="border-top: none; border-bottom: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_facility_day_4" value='1' ></div></td>                                 
+                                        <td style="border-top: none; border-bottom: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_3_supervision_chss_facility_day_5" value='1' ></div></td>
+                                     </tr>
+                                    
+                                </table>                                
+                                
+                            </td>
+                        </tr>
+                        
+                    </table>
+                    
+                </div>
+                
+                <div style="position: relative; top: -17px;"> 
+                    <table class="table_generic ">
+                        <tr>
+                            <td style="width: 4.00in; border-right: none;" ><span>4.4) Confirm with the OIC: Of the last 5 working days, which time did the CHSS spend in the community & which time in the facility? Please fill in one or more location.</span></td>
+                            <td style="width: 3.25in; padding: 0px; margin: 0px; border: none;" >
+                                
+                                <table style="width: 3.25in; border: none; " >
+                                    
+                                    <tr>
+                                        <td style="width: 0.85in; border-left: none; "></td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 1</td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 2</td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 3</td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 4</td>
+                                        <td style="width: 0.45in; text-align: center; ">Day 5</td>
+                                    </tr>
+  
+                                    <tr>
+                                        <td style="text-align: right; ">Community</td>
+                                        
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_chss_community_day_1" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_chss_community_day_2" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_chss_community_day_3" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_chss_community_day_4" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_chss_community_day_5" value='1' ></div></td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td style="text-align: right; ">Facility</td>
+                                        
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_oic_facility_day_1" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_oic_facility_day_2" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_oic_facility_day_3" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_oic_facility_day_4" value='1' ></div></td>                                 
+                                        <td style="border-top: none; position: relative; right: -14px; "><div class="checkOption" ><input type="checkbox" class="stored" name="4_4_supervision_oic_facility_day_5" value='1' ></div></td>
+                                     </tr>
+                                    
+                                </table>                                
+                                
+                            </td>
+                        </tr>
+                        
+                    </table>
+                    
+                </div>
+               
+            </div>
+            <!-- END: 4. Supervision --> 
+                       
+            <!-- 5. Recruitment -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">5. Recruitment</span>
+                <br>
+                <span style="font-style: italic; text-decoration: underline; font-size: 90%; ">Ask the OIC these questions.</span>
+            </div>
+            
+           <!-- White line spacers -->
+            <div style="height:5px"></div>
+            
+            <!-- Beginning of 5. Recruitment stacked tables -->
+            <div>
+
+                <table class="table_generic">
+                    <tr>
+                        <td class="column_1_row_two_char" >5.1) How many CHSSs are in your health facility's catchment?</td>                     
+                        <td class="column_2_row_two_char" style="border: 2px solid black; " ><input class="stored" name="5_1_recruitment_chss_number_catchment" data-lmd-valid-required data-lmd-valid-intMin="0" style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>
+                    </tr>
+                    <tr>
+                        <td class="column_1_row_two_char" >5.2) How many CHAs are in your facility's catchment?</td>                     
+                        <td class="column_2_row_two_char" style="border: 2px solid black; " ><input class="stored" name="5_2_recruitment_cha_number_catchment" data-lmd-valid-required data-lmd-valid-intMin="0" style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>
+                    </tr>
+                </table>
+
+            </div>
+            
+            <div style="position: relative; top: -4px; ">
+                <table class="table_generic">
+                    <tr>
+                        <td style="width: 4.45in; border-right: none; ">5.3) How many CHVs are in your facility's catchment?</td>
+                        
+                        <td style="width: 0.75in; border-left: none; text-align: right; ">TTMs:</td>
+                        <td style="width: 0.75in; border: 2px solid black; " ><input class="stored" name="5_1_recruitment_chss_number_catchment" data-lmd-valid-required data-lmd-valid-intMin="0" style="height: 20px; width: 0.68in; padding: 1px; border: none; text-align: center; " ></td>
+                        
+                        <td style="width: 0.55in; text-align: right; ">Other:</td>
+                        <td style="width: 0.75in; border: 2px solid black; " ><input class="stored" name="5_1_recruitment_chss_number_catchment" data-lmd-valid-required data-lmd-valid-intMin="0" style="height: 20px; width: 0.68in; padding: 1px; border: none; text-align: center; " ></td>
+                    </tr>
+                </table>
+            </div>
+                     
+            <!-- End of 5. Recruitment -->
+                
+        </div>
+        <!-- END: PAGE 2 -->
+   
+        <!-- START: PAGE 3 -->
+        <div class="page" >
+          
+
+            <!-- 6. Monitoring & Evaluation -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">6. Monitoring & Evaluation</span>
+                <br>
+                <span style="font-style: italic; font-size: 80%; ">Ask the OIC this question.</span>               
+            </div>
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+                     
+            <!-- Beginning of 6. Monitoring & Evaluation -->
+            <div> 
+
+                <table class="table_generic ">
+                    <tr>
+                        <td style="width: 4.55in; border-right: none;" ><span>6.1) Have the CHSS Supervision Report forms (Form 5.3) been submitted on time to the facility in the last 3 months?</span></td>
+                        <td style="width: 2.70in; padding: 0px; margin: 0px; border: none;" >
+
+                            <table style="width: 2.70in; border: none; " >
+
+                                <tr>   
+                                    <td style="width: 0.90in; text-align: center; ">Always</td>
+                                    <td style="width: 0.90in; text-align: center; ">Sometimes</td>
+                                    <td style="width: 0.90in; text-align: center; ">Rarely</td>
+                                </tr>
+
+                                <tr>
+
+                                    <td style="border-top: none; position: relative; left: 35px; "><div class="checkOption" ><input type="checkbox" class="stored" name="6_1_me_chss_supervision_report_always"       value='1' ></div></td>                                 
+                                    <td style="border-top: none; position: relative; left: 35px; "><div class="checkOption" ><input type="checkbox" class="stored" name="6_1_me_chss_supervision_report_sometimes"    value='1' ></div></td>                                 
+                                    <td style="border-top: none; position: relative; left: 35px; "><div class="checkOption" ><input type="checkbox" class="stored" name="6_1_me_chss_supervision_report_rarely"       value='1' ></div></td>
+                                </tr>
+
+                            </table>                                
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+    
+            <!-- START: SECTION B -->
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+            
+            <!-- SECTION A Black banner -->
+            <div style="background-color: black; color: white; font-weight: bold; font-size: 110%; " >
+                <span>SECTION B</span>
+            </div>
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+            
+            
+            <!-- 1. Health Education & Outreach -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">1. Health Education & Outreach</span>
+                <br>
+                <span style="font-style: italic; font-size: 80%; ">Ask the OIC these questions, and observe the facility.</span>   
+            </div>
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+            
+            <!-- Beginning of 1. Health Education & Outreach stacked tables -->     
+            <div> 
+                                             
+                <table class="table_generic">
+                    <tr>
+                        <td class="column_1_row_question_y_n" ><span>1.1) Are health talks conducted at this facility?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                        <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="1_1_health_education_outreach_facility_talk" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                    </tr>                        
+                </table>               
+
+                <table class="table_generic">
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        <td style="width: 6.95in; border-top: none; " >1.1b) If YES, name 3 health topics that have been discussed in the past month?</td>                     
+                    </tr>
+                        <td style="border: none; "></td>
+                        <td style="border: 2px solid black; " ><input class="stored" name="1_1_b_health_education_outreach_facility_talk" style="height: 20px; width: 6.87in; padding: 1px; border: none; text-align: left; " ></td>
+                    </tr>       
+                </table>                
+
+                <table class="table_generic" style="position: relative; top: -3px;">
+                    <tr>
+                        <td class="column_1_row_question_y_n" ><span>1.2) Is there a health talk plan (schedule) visible within the health facility?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                        <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="1_2_health_education_outreach_facility_talk_plan_visible" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                    </tr>                        
+                </table> 
+
+                <table class="table_generic" style="position: relative; top: -5px;">
+                    <tr>
+                        <td style="width: 4.95in;   border-top: none; " >1.3) How do you determine the health topic?</td>
+                        <td style="width: 1.60in;   border-top: none; padding: 3px; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_3_health_education_outreach_facility_talk_determine_topic_facility report" value='1' ><span style="padding: 3px; " >Health facility report</span></div></td>
+                        <td style="width: 0.70in;   border-top: none; padding: 3px; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_3_health_education_outreach_facility_talk_determine_topic_other" value='1' ><span style="padding: 3px; " >Other</span></div></td>               
+                    </tr>
+
+                </table>
+
+                <table class="table_generic" style="position: relative; top: -7px;">
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        <td style="width: 0.85in; border-top: none; " >1.3b) Other:</td>   
+                        <td style="width: 6.10in; border: 2px solid black; " ><input class="stored" name="1_3_b_health_education_outreach_facility_talk_other_description" style="height: 20px; width: 6.03in; padding: 1px; border: none; text-align: left; " ></td>
+                    </tr>       
+                </table>
+
+                <table class="table_generic" style="position: relative; top: -10px;">
+                    <tr>
+                        <td class="column_1_row_question_y_n" ><span>1.4) Have you conducted a demonstration on any of the health topics for the past month?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
+                        <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="1_4_health_education_outreach_facility_demonstration_topic" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                    </tr>                        
+                </table>               
+
+                <table class="table_generic" style="position: relative; top: -13px;">
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        <td style="width: 3.15in; border-top: none; " >1.4b) If YES, name health topics demonstrated:</td>   
+                        <td style="width: 3.80in; border: 2px solid black; " ><input class="stored" name="1_4_b_health_education_outreach_facility_demonstration_topic_name" style="height: 20px; width: 3.73in; padding: 0px; border: none; text-align: left; " ></td>
+                    </tr>       
+                </table> 
+                
+                
+                <table class="table_generic " style="position: relative; top: -15px;" >
+                    <tr>
+                        <td style="width: 3.65in; border-right: none;" ><span>1.5) On average, how many clients do you provide health talks to at the facility daily?</span></td>
+                        <td style="width: 3.60in; padding: 0px; margin: 0px; border: none;" >
+
+                            <table style="width: 3.60in; border: none; " >
+
+                                <tr>
+
+                                    <td style="width: 0.90in; position: relative; left: 35px; border-bottom: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_5_health_education_outreach_facility_number_client_daily_10_15"    value='1' ></div></td>                                 
+                                    <td style="width: 0.90in; position: relative; left: 35px; border-bottom: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_5_health_education_outreach_facility_number_client_daily_16_20"    value='1' ></div></td>                                 
+                                    <td style="width: 0.90in; position: relative; left: 35px; border-bottom: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_5_health_education_outreach_facility_number_client_daily_21_30"    value='1' ></div></td>
+                                    <td style="width: 0.90in; position: relative; left: 35px; border-bottom: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_5_health_education_outreach_facility_number_client_daily_31_plus"  value='1' ></div></td>
+                                </tr>
+
+                                <tr>   
+                                    <td style="text-align: center; border-top: none; ">10 - 15</td>
+                                    <td style="text-align: center; border-top: none; ">15 - 20</td>
+                                    <td style="text-align: center; border-top: none; ">20 - 30</td>
+                                    <td style="text-align: center; border-top: none; ">Above 30</td>
+                                </tr>
+
+                            </table>    
+                        </td>
+                    </tr>
+                </table>
+                      
+                <table class="table_generic" style="position: relative; top: -18px;">
+                    <tr>
+                        <td class="column_1_row_question_y_n" style="width: 6.65in; border-right: none; " ><span>1.6) Does the clinic staff conduct health talks at outreach in any of the catchment communities around this facility?</span></td>                      
+                        <td style="width: 0.30in; border-left: none;  " ><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                        <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="1_6_health_education_outreach_facility_staff_community_talk" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                    </tr>                        
+                </table>               
+
+                <table class="table_generic" style="position: relative; top: -20px;">
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        <td style="width: 3.20in; border-top: none; " >1.6b) If YES, who?</td>   
+                        <td style="width: 3.75in; border: 2px solid black; " ><input class="stored" name="1_6_b_health_education_outreach_facility_staff_community_talk_person" style="height: 20px; width: 3.68in; padding: 0px; border: none; text-align: left; " ></td>
+                    </tr>       
+                </table> 
+                               
+                <table class="table_generic " style="position: relative; top: -22px;" >
+                    <tr>
+                        <td style="width: 0.30in; border: none;" ></td>
+                        <td style="width: 1.95in; border-right: none;" ><span>1.6c) If YES, how often?</span></td>
+                        
+                        <td style="width: 5.00in; padding: 0px; margin: 0px; border: none;" >
+
+                            <table style="width: 5.00in; border: none; " >
+
+                                <tr>
+                                    <td style="width: 1.25in; position: relative; left: 55px; border-bottom: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_6_c_health_education_outreach_facility_staff_community_talk_person_often_one_week"     value='1' ></div></td>                                 
+                                    <td style="width: 1.25in; position: relative; left: 55px; border-bottom: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_6_c_health_education_outreach_facility_staff_community_talk_person_often_two_week"     value='1' ></div></td>                                 
+                                    <td style="width: 1.25in; position: relative; left: 55px; border-bottom: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_6_c_health_education_outreach_facility_staff_community_talk_person_often_one_month"    value='1' ></div></td>
+                                    <td style="width: 1.25in; position: relative; left: 55px; border-bottom: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_6_c_health_education_outreach_facility_staff_community_talk_person_often_three_month"  value='1' ></div></td>
+                                </tr>
+
+                                <tr>   
+                                    <td style="text-align: center; border-top: none; ">Once/week</td>
+                                    <td style="text-align: center; border-top: none; ">Once/2 weeks</td>
+                                    <td style="text-align: center; border-top: none; ">Once/month</td>
+                                    <td style="text-align: center; border-top: none; ">Once/3 months</td>
+                                </tr>
+
+                            </table>    
+                        </td>
+                    </tr>
+                </table>
+                                                    
+                <table class="table_generic" style="position: relative; top: -25px;">
+                    <tr>
+                        <td class="column_1_row_question_y_n" style="width: 6.65in; border-right: none; " ><span>1.7) At this facility, are there visible IEC materials with the Healthy Life logo (posters, flyers, fact sheets)?</span></td>                      
+                        <td style="width: 0.30in; border-left: none;  " ><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                        <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="1_7_health_education_outreach_facility_iec_material_healthy_life_logo" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
+                    </tr>                        
+                </table>
+                
+                <table class="table_generic" style="position: relative; top: -27px;">
+                    <tr>
+                        <td class="column_1_row_question_y_n" style="width: 7.25in; border-bottom: none;" ><span>1.8) Which of the following documents are available in your facility?</span></td>
+                    </tr>                      
+                </table>
+
+                <table class="table_generic" style="position: relative; top: -27px;">
+                    <tr>
+                        <td style="width: 0.25in; position: relative; left: 0px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_8_health_education_outreach_facility_document_wash_environmental_health_package"       value='1' ></div></td>
+                        <td style="width: 1.00in; border-top: none; border-left: none; text-align: center; "><span style="font-size: 85%; ">WASH & Environmental Health Package</span></td>
+                        <td style="width: 0.25in; position: relative; left: 0px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_8_health_education_outreach_facility_document_community_health_policy"                 value='1' ></div></td>                                 
+                        <td style="width: 1.00in; border-top: none; border-left: none; text-align: center; "><span style="font-size: 85%; ">Community Health Policy</span></td>
+                        <td style="width: 0.25in; position: relative; left: 0px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_8_health_education_outreach_facility_document_community_health_strategy"               value='1' ></div></td>
+                        <td style="width: 1.00in; border-top: none; border-left: none; text-align: center; "><span style="font-size: 85%; ">Community Health Strategy</span></td>
+                        <td style="width: 0.25in; position: relative; left: 0px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_8_health_education_outreach_facility_document_national_health_promotion_policy"        value='1' ></div></td>
+                        <td style="width: 1.00in; border-top: none; border-left: none; text-align: center; "><span style="font-size: 85%; ">National Health Promotion Policy</span></td>
+                        <td style="width: 0.25in; position: relative; left: 0px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_8_health_education_outreach_facility_document_media_tool_kit"                          value='1' ></div></td>
+                        <td style="width: 1.00in; border-top: none; border-left: none; text-align: center; "><span style="font-size: 85%; ">Media Tool Kit</span></td>
+                        <td style="width: 0.25in; position: relative; left: 0px; border-top: none; border-right: none; "><div class="checkOption" ><input type="checkbox" class="stored" name="1_8_health_education_outreach_facility_document_national_health_communication_strategy"  value='1' ></div></td>      
+                        <td style="width: 1.00in; border-top: none; border-left: none; text-align: center; "><span style="font-size: 85%; ">National Health Communication Strategy</span></td>
+                    </tr>              
+                </table>
+                
+            </div>
+            <!-- End of 1. Health Education & Outreach -->
+            
+            <!-- SECTION C Black banner -->
+            <div style="background-color: black; color: white; font-weight: bold; font-size: 110%; position: relative; top: -12px; " >
+                <span>SECTION C</span>
+                <br>
+                <span style="font-style: italic; font-size: 80%; ">Interview 1 CHA or a Natural Leader and walk around/observe the community. Vector/vermin refer to insects or animals that carry germs.</span>
+            </div>
+                       
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+                   
+            <!-- 1. Vector Control -->
+            <div style="background-color: lightgrey; position: relative; top: -8px; ">
+                <span style="font-weight: bold; ">1. Vector Control</span>
+                <br>
+                <span style="font-style: italic; font-size: 80%; ">Ask the OIC/EHT these questions at the health facility. Vector/vermin refer to insects or animals that carry germs.</span>
+            </div>
+                                  
+            <!-- Beginning of 1. Vector Control stacked tables -->
+            <div style="position: relative; top: -5px; ">
+                           
+                <table class="table_generic">
+             
+                    <tr>                       
+                        <td style="width: 6.65in; border-right: none;" ><span >1.1) Was there any vector/vermin mapping done in the last 3 months at the facility?</span></td>                     
+                        
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                  
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="1_1_vector_contol_facility_mapping" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+       
+                    </tr>
+
+                </table>
+
+                <table class="table_generic" style="position: relative; top: -3px;">
+                   
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        
+                        <td style="width: 6.35in; border-right: none; " ><span >1.1a) If YES, was the facility fumigated/sanitized/sprayed in the last 3 months?</span></td>                     
+
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                                                
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="1_1_a_vector_contol_facility_fumigated_sanitized_sprayed" data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+       
+                    </tr>
+
+                </table>
+                
+                <table class="table_generic" style="position: relative; top: -6px;" >
+             
+                    <tr>                       
+                        <td style="width: 6.65in; border-right: none;" ><span >1.2) Have vermin/vectors been observed on facility wards &/or other areas in the last 3 months?</span></td>                     
+                        
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                  
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="1_2_vector_contol_facility_observed" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+       
+                    </tr>
+
+                </table>
+                
+            </div>  
+            <!-- End of 1. Vector Control stacked tables -->
+                 
+        </div>
+        <!-- END: PAGE 3 -->
+
+        <!-- START: PAGE 4 -->
+        <div class="page">
+                                                        
+            <!-- 2. Sanitation & Waste Management -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">2. Sanitation & Waste Management</span>              
+                <br>
+                <span style="font-style: italic; font-size: 80%; ">Ask the OIC/EHT these questions, and observe the health facility.</span>
+ 
+            </div>
+            
+            <!-- White line spacers -->
+            <div style="height:3px"></div>
+                                   
+            <!-- Beginning of 2. Sanitation & Waste Management stacked tables -->
+            <div>
+                
+                <table class="table_generic">
+                                    
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >2.1) Is health care waste properly separated?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="2_1_sanitation_health_waste_separated" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                           
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >2.2) Is health care waste properly stored?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="2_2_sanitation_health_waste_stored" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                           
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >2.3) Is there a functional incinerator?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="2_3_sanitation_functional_incinerator" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                           
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >2.4) Are facility staff trained in Infection Prevention and Control (IPC)?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="2_4_sanitation_staff_trained_infection_prevention_control" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                           
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >2.5) Does the facility have staff trained in dead body swabbing and swab collection?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="2_5_sanitation_staff_trained_dead_body_swabbing" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                                        
+                </table>
+           
+                <table class="table_generic" style="position: relative; top: -3px;">
+                    <tr>
+                        <td class="column_1_row_two_char" >2.6) How many deaths were there in the facility in the last three months?</td>                     
+                        <td class="column_2_row_two_char" style="border: 2px solid black; " ><input class="stored" name="2_6_sanitation_facility_death_number" data-lmd-valid-required data-lmd-valid-intMin="0" style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>
+                    </tr>
+                </table>
+                
+                <table class="table_generic" style="position: relative; top: -6px;" >
+             
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >2.7) Does the facility have hand washing stations?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="2_7_sanitation_hand_washing_station" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                           
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >2.8) Are the latrines functional and gender sensitive?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="2_8_sanitation_functional_gender_sensitive_latrine" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+
+                           
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >2.9) Is the sanitary condition of the facility satisfactory?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="2_9_sanitation_condition_facility_satisfactory" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                                         
+                </table>
+                           
+       
+            </div>  
+            <!-- End of 2. Sanitation & Waste Management -->
+                       
+            <!-- White line spacers -->
+            <div style="height:3px"></div>
+            
+            <!-- 3. Health & Occupational Safety -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">3. Health & Occupational Safety</span>              
+                <br>
+                <span style="font-style: italic; font-size: 80%; ">Ask the OIC these questions, and observe the health facility.</span>
+            </div>
+            
+            <!-- Beginning of 3. Health & Occupational Safety  -->
+            <div>
+                              
+                <table class="table_generic">
+                                    
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >3.1) Is Personal Protection Equipment (PPE) used by workers?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="3_1_health_occupational_safety_personal_protection_equipment_used" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                    
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >3.2) Are there medical examination records of staff?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="3_2_health_occupational_safety_staff_medical_examination_record" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                           
+                    <tr>                       
+                        <td class= "column_1_row_question_y_n" ><span >3.3) Are there records of workplace injuries or sicknesses?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</td>                     
+                                                         
+                        <td class= "column_2_row_question_y_n" style="border: 2px solid black; "><input class="stored" name="3_3_health_occupational_safety_record_workplace_injury_sickness" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>   
+                    </tr>
+                                                      
+                </table>                
+                               
+            </div>
+            <!-- End of 3. Health & Occupational Safety  -->
+                  
+            <!-- White line spacers -->
+            <div style="height:3px"></div>
+            
+            <!-- 4. Water Quality -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">4. Water Quality</span>
+                <br>
+                <span style="font-style: italic; font-size: 80%; ">Ask the OIC/EHT these questions, and observe the health facility.</span>
+            </div>
+                   
+            <!-- White line spacers -->
+            <div style="height:3px"></div>
+            
+            <!-- Beginning of 4. Water Quality -->
+            <div>
+                
+                <table class="table_generic" >
+             
+                    <tr>                       
+                        <td style="width: 6.65in; border-right: none;" ><span >4.1) Does facility have access to safe drinking water sources?</span></td>                     
+                        
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                  
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="4_1_water_quality_safe_drinking_water" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+       
+                    </tr>
+                    
+                </table>
+                
+                <table class="table_generic" style="position: relative; top: -0px;">
+                   
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        
+                        <td style="width: 6.35in; border-right: none; " ><span >4.1b) Is the safe drinking water source acceptable to all facility members?</span></td>                     
+
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                                                
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="4_1_b_water_quality_safe_drinking_water_acceptable" data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+       
+                    </tr>
+                    
+                </table>    
+                                
+                <table class="table_generic" style="position: relative; top: -0px;">
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        <td style="width: 6.65in; border-top: none; " >4.1c) How many water points were analyzed in this facility?</td>   
+                        <td style="width: 0.30in; border: 2px solid black; " ><input class="stored" name="4_1_c_water_quality_water_point_analyzed" data-lmd-valid-intMin="0"  style="height: 20px; width: 0.23in; padding: 3px; border: none; text-align: center; " ></td>
+                    </tr>       
+                </table> 
+                              
+                <table class="table_generic" style="position: relative; top: -0px;">
+
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        
+                        <td style="width: 6.35in; border-right: none; " ><span >4.1d) Is the safe drinking water source available year-round?</span></td>                     
+
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                                                
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="4_1_d_water_quality_safe_drinking_water_year_round" data-lmd-valid-intMin="0" style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                            
+       
+                    </tr>
+               
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        
+                        <td style="width: 6.35in; border-right: none; " ><span >4.1e) Is the safe drinking water source well fenced and locked?</span></td>                     
+
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                                                
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="4_1_e_water_quality_safe_drinking_water_fenced_locked" data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+       
+                    </tr>
+                  
+                </table>
+                                         
+                <table class="table_generic" style="position: relative; top: -0px;">
+             
+                    <tr>                       
+                        <td style="width: 6.65in; border-right: none;" ><span >4.2) Do staff have training in water quality analysis?</span></td>                     
+                        
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                  
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="4_2_water_quality_staff_trained_analysis" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+       
+                    </tr>
+
+                </table>
+                
+                <table class="table_generic" style="position: relative; top: -0px;">
+                               
+                    <tr>
+                        <td style="width: 0.30in; border: none; "></td>
+                        
+                        <td style="width: 6.35in; border-right: none; " ><span >4.2b) If YES, does facility have reagents and functional testing kits?</span></td>                     
+
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                                                
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="4_2_b_water_quality_staff_reagent_functional_testing_kit"  data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+       
+                    </tr>
+                  
+                </table>
+                                         
+                <table class="table_generic" style="position: relative; top: -0px;">
+             
+                    <tr>                       
+                        <td style="width: 6.65in; border-right: none;" ><span >4.3) Were water points disinfected in the last 3 months?</span></td>                     
+                        
+                        <td style="width: 0.30in; text-align: center; border-left: none; "><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                                  
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="4_3_water_quality_water_point_disinfected" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+       
+                    </tr>
+
+                </table>
+                         
+            </div>  
+            <!-- End of 3. Water Quality stacked tables -->
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>   
+            
+            <!-- Notes -->
+            <div>
+                <span style="font-weight: bold; ">Notes</span>
+            </div>
+   
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+                         
+            <!-- Beginning of Notes -->
+            <div style="width: 7.35in; border: 2px solid black; " ><input class="stored" name="note" style="border: none; width:7.18in; padding: 1px; " ></div>
+
+            <!-- End of Notes -->
+            
+            <!-- White line spacers -->
+            <div style="height: 10px"></div>
+            
+            <!-- START: M&E Box -->  
+            <div id="meBox">
+                <span class="blackBox">M&E</span>
+                <span class="blackBox">ISF.0.20</span>
+                &nbsp;&nbsp;&nbsp;
+                DE Initials:    <input class="stored" name="meta_de_init" style="width: 0.70in; text-align: center; ">
+                DE Date:        <input class="stored" name="meta_de_date" style="width: 0.78in; text-align: center; ">
+                QA Initials:    <input class="stored" name="meta_qa_init" style="width: 0.35in; text-align: center; ">
+                QA Date:        <input class="stored" name="meta_qa_date" style="width: 0.78in; text-align: center; ">
+                <input name='meta_form_version' class='stored' type='hidden' value='1.0'>
+            </div>
+            <!-- START: M&E Box -->   
+                                             
+        </div>
+        <!-- END: PAGE 4 -->
+ 
+        <!-- START: S/C Buttons -->
+        <div class="formButtons">
+            <button id="lmd_submit" class="btn btn-primary">Submit form</button>&nbsp;
+            <button id="lmd_next"   class="btn btn-primary">Next form</button>&nbsp;
+            <button id="lmd_cancel" class="btn btn-primary">Cancel</button>
+        </div>
+        <!-- END: S/C Buttons -->
+          
+        <!-- START: Hidden fields -->
+        <input type="hidden" class="stored" name="database" value="liberiad_upload">
+        <input type="hidden" class="stored" name="table" value="de_integrated_supervision_tool_facility">
+        <!-- END: Hidden fields -->
+        
+    </body>
+    
+</html>
