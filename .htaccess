@@ -14,7 +14,6 @@
     RewriteEngine on
 
     # Redirect lastmiledata.org/offline --> DEQA page
-    # !!!!! This doesn't work offline; replace this with a simple (cached) forwarding page !!!!!
     RewriteCond %{HTTP_HOST} ^(www\.)?liberiamohdata\.org$ [NC]
     RewriteRule ^offline$ "https\:\/\/liberiamohdata\.org\/LMDLiberiaMOH\/build\/pages\/page_deqa\.html" [R=301,L]
 
