@@ -35,8 +35,6 @@ $(document).ready(function() {
     // Set de_init and de_date; set fields to readonly
     $de_date.val(LMD_utilities.mysql_date());
     $de_date.attr('readonly','readonly');
-    $de_init.val(sessionStorage.username);
-    $de_init.attr('readonly','readonly');
     
     // Set timestamps, data source, UUID
     $("#meBox").append("<input name='meta_de_time_start' class='stored' type='hidden'>");
