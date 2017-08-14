@@ -1,5 +1,5 @@
 
-# Last Mile Data - lib
+# LMD Liberia MOH - lib
 
 # Cache "forever"; manually change filename if a library file is changed/upgraded (e.g. add version number)
 <IfModule mod_expires.c>

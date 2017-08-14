@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 sourceMap: true,
-                banner: '/*! LAST MILE DATA build: <%= grunt.template.today("yyyy-mm-dd hh:dd:ss") %> */\n'
+                banner: '/*! LMD Liberia MOH build: <%= grunt.template.today("yyyy-mm-dd hh:dd:ss") %> */\n'
             },
             main: {
                 files: [{
