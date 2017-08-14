@@ -148,6 +148,15 @@ $(document).ready(function(){
     });
     
     
+    // EVENT HANDLER: AppCache downloading
+    applicationCache.ondownloading = function() {
+        // Hide any existing modals; display appcacheRefresh modal
+        $('.modal').modal('hide');
+        $('#modal_appcacheRefresh').modal();
+        return false;
+    }
+    
+    
     // ERROR HANDLER: AppCache error
     window.applicationCache.onerror = function (e) {
         $('#modal_appcacheRefresh_text').html('An error occurred (AppCache error). Please contact Ministry of Health for assistance.');
