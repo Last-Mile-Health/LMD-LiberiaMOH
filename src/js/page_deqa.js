@@ -25,9 +25,9 @@ $(document).ready(function(){
     // CLICK HANDLER: Delete Records
     $('#modal_deleteRecords_submit').click(function(){
         console.log($('#deletePassword').val());
-        if ($('#deletePassword').val() == 112358) {
+        if ($('#deletePassword').val() == 'liberiA') {
             LMD_fileSystemHelper.deleteFile('data.lmd');
-            setTimeout(function(){
+            setTimeout(function() {
                 alert('File successfully deleted.');
                 location.reload();
             }, 1500);
@@ -331,13 +331,14 @@ function sendRecordsAJAX(){
                         },
                         error: function(request, status, error) {
 
-                            // Change ajaxBlock to GREEN
+                            // Change ajaxBlock to RED
                             $("#ajaxBlock_" + JSON.parse(request.responseText).rKeyAJAX).css('background-color','#C12E2A');
 
                             // Log failure; increment AJAX failure counter
                             console.log('ajax error :/');
                             console.log(request);
                             numAjax_fail++;
+                            
                         }
                     });
                 }
