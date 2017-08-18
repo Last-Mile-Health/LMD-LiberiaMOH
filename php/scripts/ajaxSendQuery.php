@@ -12,7 +12,7 @@ $transaction = isset($_POST['transaction']) ? $_POST['transaction'] : false;
 $queryDebugging = isset($_POST['queryDebugging']) ? $_POST['queryDebugging'] : 'false';
 
 // Set include path; require connection strings
-set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LastMileData/php/includes" );
+set_include_path( get_include_path() . PATH_SEPARATOR . $_SERVER['DOCUMENT_ROOT'] . "/LMDLiberiaMOH/php/includes" );
 require_once("cxn.php");
 
 // Debug queries with PHP Console (uncomment to use)
@@ -22,7 +22,7 @@ require_once("cxn.php");
 //$handler->debug($queryString);
 
 // Debug queries
-//mysqli_query($cxn, 'INSERT INTO liberiad_upload.tbl_utility_dataUploadDebugging (queryString) VALUES ("' . $queryString . '")');
+mysqli_query($cxn, 'INSERT INTO liberiad_upload.tbl_utility_datauploaddebugging (queryString) VALUES ("' . $queryString . '")');
 
 if ($transaction) {
     
