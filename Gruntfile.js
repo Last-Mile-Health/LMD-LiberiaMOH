@@ -138,7 +138,7 @@ module.exports = function(grunt) {
                     'build/js/formValidate.*.js',
                     'build/js/loadContents.*.js'
                 ],
-                dest: 'lmdliberiamoh_v2.appcache'
+                dest: 'lmdliberiamoh_v5.appcache'
             }
         }
     });

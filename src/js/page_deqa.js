@@ -5,7 +5,7 @@ $(document).ready(function(){
     
     // Set app "last updated" timestamp (from AppCache manifest)
     $.ajax({
-        url: '../../lmdliberiamoh_v2.appcache',
+        url: '../../lmdliberiamoh_v5.appcache',
         success: function(data){
             $('#appVersion').text('App last updated: ' + data.substring(23,47));
         }
@@ -57,7 +57,7 @@ $(document).ready(function(){
     // QA Click handlers (current forms)
     $('#qa_community').click(function() {
         launchQAModal({
-            targetForm: "../forms/integrated_chsd_deoh_nhpd_supervision_tool_community.html",
+            targetForm: "../forms/integrated_supervision_tool_community.html",
             qaFormName: "Integrated Supervision Tool: Community",
             pKey1_name: "month_complete",
             pKey2_name: "community",
@@ -70,7 +70,7 @@ $(document).ready(function(){
     // QA Click handlers (current forms)
     $('#qa_facility').click(function() {
         launchQAModal({
-            targetForm: "../forms/integrated_chsd_deoh_nhpd_supervision_tool_facility.html",
+            targetForm: "../forms/integrated_supervision_tool_facility.html",
             qaFormName: "Integrated Supervision Tool: Facility",
             pKey1_name: "month_complete",
             pKey2_name: "facility",

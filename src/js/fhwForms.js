@@ -32,9 +32,13 @@ $(document).ready(function() {
     $de_date.after("<input id='de_print_date'>");
     $de_init.after("<input id='de_print_init'>");
     
-    // Set de_init and de_date; set fields to readonly
+    // Set de_date; set fields to readonly
+    $qa_date = $("input[name=meta_qa_date]");
+    $qa_init = $("input[name=meta_qa_init]");
     $de_date.val(LMD_utilities.mysql_date());
     $de_date.attr('readonly','readonly');
+    $qa_date.attr('readonly','readonly');
+    $qa_init.attr('readonly','readonly');
     
     // Set timestamps, data source, UUID
     $("#meBox").append("<input name='meta_de_time_start' class='stored' type='hidden'>");
@@ -76,10 +80,11 @@ $(document).ready(function() {
                 }
             }
             
-            // Set qa_date; set to readonly
-            $qa_date = $("input[name=qa_date]");
+            // Set qa_date; set to readonly; make qa_init editable
+            $qa_init.removeAttr('readonly');
             $qa_date.val(LMD_utilities.mysql_date());
             $qa_date.attr('readonly','readonly');
+            $de_init.attr('readonly','readonly');
             
         });
         
