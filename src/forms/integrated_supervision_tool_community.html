@@ -107,14 +107,14 @@
             
             <div class="thickBox" style="border: none; ">
                        
-            <!-- Data Collector Team field, not part of paper form.  data-lmd-valid-required  -->
+            <!-- Data Collector Team field, not part of paper form. -->
          
                 <hr style="border-bottom: none; width: 7.15in; " > 
                 <div style="clear:both; height: 1px; " ></div>
                      
                 <div class="headField" style="width: 1.5in; font-weight: bold; " >Data Collector Team:</div>
                 <div class="textOption" style="width: 3.25in; border: 2px black solid; ">
-                    <input class="stored" name="data_collector_team" data-lmd-valid-restrict data-lmd-valid-select='["CHT","MOH","Partner - conducting county-level supervision", "Partner - conducting national-level supervision"]' style="width: 3in; padding: 0; border: none; " >
+                    <input class="stored" name="data_collector_team" data-lmd-valid-required data-lmd-valid-select='["CHT","MOH","Partner - conducting county-level supervision", "Partner - conducting national-level supervision"]' style="width: 3in; padding: 0; border: none; " >
                 </div>
                            
                 <hr style="border-bottom: none; width: 7.15in; " >                  
@@ -1780,7 +1780,7 @@
                 <span class="blackBox">M&E</span>
                 <span class="blackBox">ISC.0.20</span>
                 &nbsp;&nbsp;&nbsp;
-                DE Initials:    <input class="stored" name="meta_de_init" style="width: 0.70in; text-align: center; ">
+                DE Initials:    <input class="stored" name="meta_de_init" style="width: 0.70in; text-align: center; " data-lmd-valid-required>
                 DE Date:        <input class="stored" name="meta_de_date" style="width: 0.78in; text-align: center; ">
                 QA Initials:    <input class="stored" name="meta_qa_init" style="width: 0.35in; text-align: center; ">
                 QA Date:        <input class="stored" name="meta_qa_date" style="width: 0.78in; text-align: center; ">
