@@ -4,7 +4,7 @@
     
     <head>
      
-        <title>Integrated CHSD / DEOH / NHPD Supervision Spot Check Tool - Health Facility (v0.20)</title>
+        <title>Integrated CHSD / DEOH / NHPD Supervision Spot Check Tool - Community (v0.20)</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
@@ -24,7 +24,7 @@
         
         <style>
             
-            #meBox { position:relative; top: 6.90in; }
+            #meBox { position:relative; top: 6.00in; }
                  
             .table_supply_chain     { width: 7.25in; font-size: 100%; margin: 1px; padding: 1px; border-collapse: collapse; }
             .table_supply_chain th  { border: 1px solid black; padding: 3px; text-align: left; }
@@ -67,7 +67,7 @@
                 <img style="float:left" src="../images/logo_liberia.png">
                 <span class="h4" style="font-size: 140%; float: center; " >Integrated CHSD / DEOH / NHPD Supervision Spot Check Tool -</span>
                 <span class="blackBox" style="float: right; ">v0.20</span>
-                <span class="h4" style="font-size: 140%; float: center; " >Health Facility</span>
+                <span class="h4" style="font-size: 140%; float: center; " >Community</span>
                 
             </div>
             
@@ -77,12 +77,11 @@
             <div class="thickBox" style="border: none; ">
                 
                 <div>
-                    <span>This tool is to be used by enumerators to conduct spot checks for integrated supervision visits. Spot checks should occur quarterly, within two weeks of the original supervision visit, in counties that have conducted integrated supervision visits. Enumerators conducting spot checks should find the CHSS originally interviewed during the integrated supervision visit and fill out the following tool.</span>
-                    <span style="font-weight: bold; ">  Inform the CHSS you are conducting a follow-up assessment to verify the accuracy of the data collected during the first visit, and make sure the CHSS is aware that he/she was selected randomly for this verification and not as a result of his or her original answers.</span> 
+                    <span>This tool is to be used by enumerators to conduct spot checks for integrated supervision visits. Spot checks should occur quarterly, within two weeks of the original supervision visit, in counties that have conducted integrated supervision visits. Enumerators conducting spot checks should find the CHA originally interviewed during the integrated supervision visit and fill out the following tool.</span>
+                    <span style="font-weight: bold; "> Inform the CHA you are conducting a follow-up assessment to verify the accuracy of the data collected during the first visit, and make sure the CHA is aware that he/she was selected randomly for this verification and not as a result of his or her original answers.</span> 
                 </div>
                 
                 <div style="clear:both; height:15px;"></div>
-                                                 
             <!-- First header row -->
                 <div class="headField" style="width:0.50in">County</div>
                 <div class="headField" style="width:1.50in; "><input class="stored" name="county" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["Bomi","Bong","Gbarpolu","Grand Bassa","Grand Cape Mount","Grand Gedeh","Grand Kru","Lofa","Margibi","Maryland","Montserrado","Nimba","River Gee","Rivercess","Sinoe"]' style="width:1.45in; border: 2px solid black; padding: 1px; " ></div>
@@ -90,8 +89,8 @@
                 <div class="headField" style="width:0.70in">H. District</div>
                 <div class="headField" style="width:1.50in; "><input class="stored" name="health_district" data-lmd-valid-required style="width:1.45in; border: 2px solid black; padding: 1px; " ></div>
          
-                <div class="headField" style="width:1.00in">Health Facility</div>
-                <div class="headField" style="width:2.05in; "><input class="stored" name="facility" data-lmd-valid-required style="width:2.00in; border: 2px solid black; padding: 1px;  " ></div>
+                <div class="headField" style="width:0.80in">Community</div>
+                <div class="headField" style="width:2.25in; "><input class="stored" name="community" data-lmd-valid-required style="width:2.20in; border: 2px solid black; padding: 1px;  " ></div>
                                        
                 <div style="clear:both; height:3px;"></div>
                 
@@ -105,25 +104,26 @@
                 <div class="headField" style="width:0.40in">Year</div>
                 <div class="headField" style="width:0.60in; "><input class="stored" name="year_complete" data-lmd-valid-required data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030"  style="width:0.50in; text-align: center; border: 2px solid black; padding: 1px; " ></div>
  
+                <div class="headField" style="width:0.60in">CHA ID</div>
+                <div class="headField" style="width:1.35in; "><input class="stored" name="cha_id"     style="width:1.30in; border: 2px solid black; padding: 1px; " ></div>
+
                 <div class="headField" style="width:0.70in">CHSS ID</div>
                 <div class="headField" style="width:1.35in; "><input class="stored" name="chss_id"    style="width:1.35in; border: 2px solid black; padding: 1px; " ></div>
-                              
+
                 <div style="clear:both; height:3px;"></div>
                 
              <!-- Third header row -->
-             
+                <div class="headField" style="width:0.50in">CHA</div>
+                <div class="headField" style="width:1.95in; "><input class="stored" name="cha"            data-lmd-valid-required style="width:1.80in; border: 2px solid black; padding: 1px; " ></div>
+
+                <div class="headField" style="width:0.75in">Sex (M/F)</div>
+                <div class="headField" style="width:0.45in; "><input class="stored" name="cha_gender" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["M","m","F","f"]' style="width:0.40in; text-align: center; border: 2px solid black; padding: 1px; " ></div>
+         
                 <div class="headField" style="width:0.50in">CHSS</div>
                 <div class="headField" style="width:1.90in; "><input class="stored" name="chss"           data-lmd-valid-required style="width:1.80in; border: 2px solid black; padding: 1px; " ></div>
  
                 <div class="headField" style="width:0.75in">Sex (M/F)</div>
                 <div class="headField" style="width:0.45in; "><input class="stored" name="chss_gender" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["M","m","F","f"]' style="width:0.40in; text-align: center; border: 2px solid black; padding: 1px; " ></div>
-
-                <div class="headField" style="width:0.50in">OIC</div>
-                <div class="headField" style="width:1.95in; "><input class="stored" name="oic"            data-lmd-valid-required style="width:1.80in; border: 2px solid black; padding: 1px; " ></div>
-
-                <div class="headField" style="width:0.75in">Sex (M/F)</div>
-                <div class="headField" style="width:0.45in; "><input class="stored" name="oic_gender" data-lmd-valid-required data-lmd-valid-restrict data-lmd-valid-autoC='["M","m","F","f"]' style="width:0.40in; text-align: center; border: 2px solid black; padding: 1px; " ></div>
-         
 
                 <div style="clear:both; height:3px;"></div>
                 
@@ -133,7 +133,7 @@
 
                 <div class="headField" style="width:1.60in">Data Collector Position</div>
                 <div class="headField" style="width:2.05in; "><input class="stored" name="data_collector_position"    data-lmd-valid-required style="width:2.00in; border: 2px solid black; padding: 1px; " ></div>
-                             
+                                                           
             </div>
             <!-- END: FORM HEADER -->
              
@@ -141,7 +141,7 @@
             <div style="background-color: lightgrey; ">
                 <span style="font-weight: bold; ">Visit Verification</span>
                 <br>
-                <span style="font-style: italic; font-size: 90%; ">Interview the CHSS.</span>
+                <span style="font-style: italic; font-size: 90%; ">Interview the CHA.</span>
             </div>
                       
             <!-- White line spacers -->
@@ -151,7 +151,7 @@
 
                 <table class="table_generic ">
                     <tr>
-                        <td style="width: 6.50in; border-right: none;" ><span>Check the date on the original supervision tool from the visit to the CHSS you are currently interviewing, and whether the tool was filled out by Ministry of Health representatives or County Health Team representatives. Ask the CHSS if a team from the MOH or CHT came to interview them on that date, and mark the answer in the appropriate bubble.</span></td>
+                        <td style="width: 6.50in; border-right: none;" ><span>Check the date on the original supervision tool from the visit to the CHA you are currently interviewing, and whether the tool was filled out by Ministry of Health representatives or County Health Team representatives. Ask the CHA if a team from the MOH or CHT came to interview them on that date, and mark the answer in the appropriate bubble.</span></td>
                                         
                         <td style="width: 0.75in; padding: 0px; margin: 0px; border-left: none;" >
 
@@ -191,8 +191,7 @@
             <div style="background-color: lightgrey; ">
                 <span style="font-weight: bold; ">Supply Chain</span>
                 <br>
-                <span style="font-style: italic; font-size: 90%; ">Conduct verification in facility. Answers in this section refer to</span>
-                <span style="font-style: italic; font-weight: bold; font-size: 90%; ">stock in CHA container & CHSS supplies only.</span>
+                <span style="font-style: italic; font-size: 90%; ">Conduct on the spot verification with the CHA and his/her supply box.</span>
             </div>
             
             <!-- White line spacers -->
@@ -201,22 +200,14 @@
             <div>
                 
                 <!-- START: Supply Chain table -->
-                <div>
-                    <table class="table_generic">
-                        <tr>
-                            <td class="column_1_row_question_y_n" ><span>Is there a separate locked box/container for CHA drugs and supplies?</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                      
-                            <td class="column_2_row_question_y_n" style="border: 2px solid black; " ><input class="stored" name="supply_locked_box_cha"  data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td> 
-                        </tr>                  
-                    </table>                
-                </div> 
-                
-                <div style="position: relative; top: -3px; ">
+              
+                <div style="position: relative; top: 0px; ">
                           
                     <table class="table_supply_chain">
                                       
                     <!-- Table header -->
                         <tr>
-                            <th class="column_1_supply_chain" style="font-weight: normal; text-align: left; " colspan="2">Does the CHA container have all of the following in stock? Fill in the appropriate bubble. A commodity is in stock if there is at least one of the items in the box (zero items = stock out).</th>
+                            <th class="column_1_supply_chain" style="font-weight: normal; text-align: left; " colspan="2">Does the CHA have all of the following in stock? Fill in the appropriate bubbles. A commodity is in stock if there is at least one of the items in the box (zero items = stock out).</th>
                             <th class="column_4_supply_chain" style="font-weight: normal; text-align: center; " colspan="7">If no, date when stocked out:</th>                     
                         </tr>
                                    
@@ -285,76 +276,116 @@
                             <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_disposable_glove_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
                         </tr>
                         
-                     <!-- 3.2.f -->
-                     <tr>
+                        <!-- 3.2.f -->
+                        <tr>
                         
-                        <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">ACT 25/67.5 mg tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
-                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="supply_act_25_67_5_mg_tablet_in_stock"           data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
-                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="supply_act_25_67_5_mg_tablet_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]'   style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
-                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="supply_act_25_67_5_mg_tablet_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
-                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
-                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="supply_act_25_67_5_mg_tablet_stock_out_year"    data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
-                    </tr>
+                            <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">ACT 25/67.5 mg tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="supply_act_25_67_5_mg_tablet_in_stock"           data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="supply_act_25_67_5_mg_tablet_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]'   style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="supply_act_25_67_5_mg_tablet_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="supply_act_25_67_5_mg_tablet_stock_out_year"    data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
                                        
-                    <!-- 3.2.g -->
-                     <tr>
-                        
-                        <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">ACT 50/135 mg tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
-                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_act_50_135_mg_tablet_in_stock"           data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
-                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_act_50_135_mg_tablet_stock_out_month" data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
-                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_act_50_135_mg_tablet_stock_out_day"   data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
-                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
-                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_act_50_135_mg_tablet_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
-                    </tr>
-                    
-                    
-                    
-                    <!-- 3.2.h -->
-                     <tr>
-                        
-                        <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Artesunate 100 mg suppository</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
-                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_artesunate_100_mg_suppository_in_stock"              data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
-                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_artesunate_100_mg_suppository_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
-                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_artesunate_100_mg_suppository_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
-                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
-                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_artesunate_100_mg_suppository_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
-                    </tr>
-                    
-                    
-                    
-                    <!-- 3.2.i -->
-                     <tr>
-                        
-                        <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Amoxicillin 250 mg dispersible tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
-                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_amox_250_mg_dispersible_tablet_in_stock"              data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
-                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_amox_250_mg_dispersible_tablet_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
-                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_amox_250_mg_dispersible_tablet_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
-                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
-                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_amox_250_mg_dispersible_tablet_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
-                    </tr>
+                        <!-- 3.2.g -->
+                        <tr>                       
+                            <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">ACT 50/135 mg tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_act_50_135_mg_tablet_in_stock"           data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_act_50_135_mg_tablet_stock_out_month" data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_act_50_135_mg_tablet_stock_out_day"   data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_act_50_135_mg_tablet_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+                                                      
+                        <!-- 3.2.h -->
+                        <tr>                       
+                            <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Artesunate 100 mg suppository</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_artesunate_100_mg_suppository_in_stock"              data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_artesunate_100_mg_suppository_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_artesunate_100_mg_suppository_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_artesunate_100_mg_suppository_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+                                       
+                        <!-- 3.2.i -->
+                        <tr>                       
+                            <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Amoxicillin 250 mg dispersible tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_amox_250_mg_dispersible_tablet_in_stock"              data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_amox_250_mg_dispersible_tablet_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_amox_250_mg_dispersible_tablet_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_amox_250_mg_dispersible_tablet_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
                                      
-                    <!-- 3.2.j -->
-                     <tr>
-                        
-                        <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">ORS 20.6/1L sachet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
-                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_ors_20_6_1l_sachet_in_stock"             data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
-                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_ors_20_6_1l_sachet_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
-                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_ors_20_6_1l_sachet_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
-                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
-                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_ors_20_6_1l_sachet_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
-                    </tr>
-                       
-                    <!-- Split supply chain table up here.  Continue page on 2. -->  
+                        <!-- 3.2.j -->
+                        <tr>                       
+                            <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">ORS 20.6/1L sachet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_ors_20_6_1l_sachet_in_stock"             data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_ors_20_6_1l_sachet_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_ors_20_6_1l_sachet_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_ors_20_6_1l_sachet_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+                    
+                        <!-- 3.2.k -->
+                        <tr>                        
+                            <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Zinc sulfate 20 mg scored tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="supply_zinc_sulfate_20_mg_scored_tablet_in_stock"            data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="supply_zinc_sulfate_20_mg_scored_tablet_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="supply_zinc_sulfate_20_mg_scored_tablet_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="supply_zinc_sulfate_20_mg_scored_tablet_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+                                       
+                        <!-- 3.2.l -->
+                        <tr>                       
+                            <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Paracetamol 100 mg dispersible tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_paracetamol_100_mg_disp_tablet_in_stock"              data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_paracetamol_100_mg_disp_tablet_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_paracetamol_100_mg_disp_tablet_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_paracetamol_100_mg_disp_tablet_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+                                      
+                        <!-- 3.2.m -->
+                        <tr>                        
+                            <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">MUAC strap</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_muac_strap_in_stock"             data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_muac_strap_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_muac_strap_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_muac_strap_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+                                       
+                        <!-- 3.2.n -->
+                        <tr>                       
+                            <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Dispensing bags</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
+                            <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="supply_dispensing_bag_in_stock"          data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
+                            <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="supply_dispensing_bag_stock_out_month"  data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
+                            <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
+                            <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="supply_dispensing_bag_stock_out_day"    data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
+                            <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
+                            <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="supply_dispensing_bag_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
+                        </tr>
+                                            
+                        <!-- Split supply chain table up here.  Continue page on 2. -->  
                     
                     </table>
 
@@ -372,59 +403,7 @@
             <!-- START: Supply Chain Table.  Continued from page 1. -->
             <div>   
                 <table class="table_supply_chain">
-                 
-                    <!-- 3.2.k -->
-                     <tr>
-                        
-                        <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Zinc sulfate 20 mg scored tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
-                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="supply_zinc_sulfate_20_mg_scored_tablet_in_stock"            data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
-                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="supply_zinc_sulfate_20_mg_scored_tablet_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
-                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="supply_zinc_sulfate_20_mg_scored_tablet_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
-                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
-                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="supply_zinc_sulfate_20_mg_scored_tablet_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
-                    </tr>
-                                       
-                    <!-- 3.2.l -->
-                     <tr>
-                        
-                        <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Paracetamol 100 mg dispersible tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
-                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_paracetamol_100_mg_disp_tablet_in_stock"              data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
-                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_paracetamol_100_mg_disp_tablet_stock_out_month"    data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
-                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_paracetamol_100_mg_disp_tablet_stock_out_day"      data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
-                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
-                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_paracetamol_100_mg_disp_tablet_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
-                    </tr>
-                                      
-                    <!-- 3.2.m -->
-                     <tr>
-                        
-                        <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">MUAC strap</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
-                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input class="stored" name="supply_muac_strap_in_stock"             data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
-                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input class="stored" name="supply_muac_strap_stock_out_month"   data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
-                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input class="stored" name="supply_muac_strap_stock_out_day"     data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
-                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
-                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_muac_strap_stock_out_year"     data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
-                    </tr>
-                                       
-                    <!-- 3.2.n -->
-                     <tr>
-                        
-                        <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Dispensing bags</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
-                        <td class="column_3_supply_chain" style="width: 0.30; border: 2px solid black; " ><input    class="stored" name="supply_dispensing_bag_in_stock"          data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]'      style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_4_supply_chain" style="width: 0.70in; text-align: center; " >Month</td> 
-                        <td class="column_5_supply_chain" style="width: 0.90in; border: 2px solid black; " ><input  class="stored" name="supply_dispensing_bag_stock_out_month"  data-lmd-valid-restrict data-lmd-valid-autoC='["January","February","March","April","May","June","July","August","September","October","November","December"]' style="height: 20px; width: 0.83in; padding: 1px; border: none; text-align: center; " ></td>                                  
-                        <td class="column_6_supply_chain" style="width: 0.35in; text-align: center; "  >Day</td>
-                        <td class="column_7_supply_chain" style="width: 0.35in; border: 2px solid black; " ><input  class="stored" name="supply_dispensing_bag_stock_out_day"    data-lmd-valid-intMin="1"    data-lmd-valid-intMax="31"   style="height: 20px; width: 0.28in; padding: 1px; border: none; text-align: center; " ></td>                     
-                        <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
-                        <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="supply_dispensing_bag_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
-                    </tr>
-                                       
+                                                     
                     <!-- 3.2.o -->
                       <tr>
                         
@@ -467,8 +446,70 @@
                 </table>
             </div>
             
-            <!-- END: Supply Chain Table -->    
-                                
+            <!-- END: Supply Chain Table -->   
+            
+            
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+                       
+            <!-- 5. Monitoring & Evaluation -->
+            <div style="background-color: lightgrey; ">
+                <span style="font-weight: bold; ">Monitoring & Evaluation</span>
+                <br>
+                <span style="font-style: italic; font-size: 90%; ">Interview the CHA.</span>
+            </div>
+                               
+            <!-- White line spacers -->
+            <div style="height:5px"></div>
+                    
+            <!-- Beginning of the 5. Monitoring & Evaluation -->
+            <div>
+                
+                <table class="table_generic" style="position: relative; top: -0px; ">
+                    <tr>  
+                        <td><span>Are you equipped with the following job aids?  </span><span style="font-style: italic; ">Check that they are in color and laminated. If job aids are present but not in color and/or not laminated, the "no" bubble should be filled in.</span></td>                    
+                     </tr>
+                </table>
+                
+                <table class="table_generic" style="position: relative; top: -3px;">
+                    <tr>
+                        
+                        <td style="width: 3.60in"><span style="position: relative; right: -10px;" >Module 1 Job Aid</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                     
+
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="me_module_1_job_aid"   data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                       
+
+                        <td style="width: 3.05in"><span style="position: relative; right: -10px;" >Module 3 Job Aid</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                        
+                        <td style="width: 0.30in; border: 2px solid black; "><input class="stored" name="me_module_3_job_aid"   data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+ 
+                    </tr>
+                    
+                    <tr>
+                        
+                        <td><span style="position: relative; right: -10px;" >Module 2 Job Aid</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                        
+                        <td style="border: 2px solid black; "><input class="stored" name="me_module_2_job_aid"   data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                       
+                        
+                        <td><span style="position: relative; right: -10px;" >5.2d) Module 4 Job Aid</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                        
+                        <td style="border: 2px solid black; "><input class="stored" name="me_module_4_job_aid"   data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                                               
+                    
+                    </tr>
+                    
+                    <tr>
+                        
+                        <td><span style="position: relative; right: -10px;" >BCC Tools</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>
+                        
+                        <td style="border: 2px solid black; "><input class="stored" name="me_bcc_tools"   data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 20px; width: 0.23in; padding: 1px; border: none; text-align: center; " ></td>                       
+                        
+                        <td style="border: none; "></td><td style="border: none; "></td>
+                    </tr>
+
+                </table>
+                         
+            </div>
+            <!-- End of the 5. Monitoring & Evaluation stacked tables -->
+                                         
             
             <!-- White line spacers -->
             <div style="height:10px"></div>
@@ -514,7 +555,7 @@
           
         <!-- START: Hidden fields -->
         <input type="hidden" class="stored" name="database" value="liberiad_upload">
-        <input type="hidden" class="stored" name="table" value="de_integrated_supervision_tool_facility_spot_check">
+        <input type="hidden" class="stored" name="table" value="de_integrated_supervision_tool_community_spot_check">
         <!-- END: Hidden fields -->
         
         

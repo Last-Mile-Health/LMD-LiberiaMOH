@@ -80,17 +80,28 @@ $(document).ready(function(){
     });
     
     // QA Click handlers (current forms)
+    $('#qa_community_spot_check').click(function() {
+        launchQAModal({
+            targetForm: "../forms/integrated_supervision_tool_community_spot_check.html",
+            qaFormName: "Integrated Supervision Tool Spot Check: Community",
+            pKey1_name: "month_complete",
+            pKey2_name: "community",
+            pKey1_label: "Month",
+            pKey2_label: "Community"
+        });
+    });
+
+    // QA Click handlers (current forms)
     $('#qa_facility_spot_check').click(function() {
         launchQAModal({
             targetForm: "../forms/integrated_supervision_tool_facility_spot_check.html",
-            qaFormName: "Integrated Supervision Tool: Facility",
+            qaFormName: "Integrated Supervision Tool Spot Check: Facility",
             pKey1_name: "month_complete",
             pKey2_name: "facility",
             pKey1_label: "Month",
             pKey2_label: "Facility"
         });
-    });
- 
+    }); 
     
     // CLICK HANDLER: QA modal
     $('#modal_QA_submit').click(function() {
