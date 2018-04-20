@@ -5,7 +5,7 @@ $(document).ready(function(){
     
     // Set app "last updated" timestamp (from AppCache manifest)
     $.ajax({
-        url: '../../lmdliberiamoh_v7.appcache',
+        url: '../../lmdliberiamoh_v8.appcache',
         success: function(data){
             $('#appVersion').text('App last updated: ' + data.substring(23,47));
         }
