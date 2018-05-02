@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html manifest="../../lmdliberiamoh_v8.appcache">
+<html manifest="../../lmdliberiamoh_v10.appcache">
 <!--<html>-->
     
     <head>
@@ -77,8 +77,13 @@
                     <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#modal_sendRecords" title="Send records to the central MOH Database. Requires an active internet connection.">Send Records</a></p>
                     <p><a href="tool_viewLocalRecords.html" class="btn btn-default" title="View all locally-stored records.">View local records</a></p>
                     <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#modal_deleteRecords" title="Delete all locally-stored records.">Delete local records</a></p>
+                    
                     <p><a onclick="var w = prompt('Please enter password.'); if(w==p){return true;} else {return false;}" download="data_community.csv" href="../../php/scripts/dumpTablesAsCSVs.php?table=de_integrated_supervision_tool_community" class="btn btn-default">Download data: community</a></p>
+                    <p><a onclick="var w = prompt('Please enter password.'); if(w==p){return true;} else {return false;}" download="data_community_spot_check.csv" href="../../php/scripts/dumpTablesAsCSVs.php?table=de_integrated_supervision_tool_community_spot_check" class="btn btn-default">Download data: community spot check</a></p>
+                    
                     <p><a onclick="var w = prompt('Please enter password.'); if(w==p){return true;} else {return false;}" download="data_facility.csv" href="../../php/scripts/dumpTablesAsCSVs.php?table=de_integrated_supervision_tool_facility" class="btn btn-default">Download data: facility</a></p>
+                    <p><a onclick="var w = prompt('Please enter password.'); if(w==p){return true;} else {return false;}" download="data_facility_spot_check.csv" href="../../php/scripts/dumpTablesAsCSVs.php?table=de_integrated_supervision_tool_facility_spot_check" class="btn btn-default">Download data: facility spot check</a></p>
+                
                 </div>
             </div>
             
