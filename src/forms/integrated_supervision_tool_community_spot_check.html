@@ -4,7 +4,7 @@
     
     <head>
      
-        <title>Integrated CHSD / DEOH / NHPD Supervision Spot Check Tool - Community (v0.20)</title>
+        <title>Integrated CHSD / DEOH / NHPD Supervision Spot Check Tool - Community (v0.30)</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name='robots' content='noindex'>
@@ -24,7 +24,7 @@
         
         <style>
             
-            #meBox { position:relative; top: 6.00in; }
+            #meBox { position:relative; top: 4.60in; }
                  
             .table_supply_chain     { width: 7.25in; font-size: 100%; margin: 1px; padding: 1px; border-collapse: collapse; }
             .table_supply_chain th  { border: 1px solid black; padding: 3px; text-align: left; }
@@ -66,7 +66,7 @@
                 
                 <img style="float:left" src="../images/logo_liberia.png">
                 <span class="h4" style="font-size: 140%; float: center; " >Integrated CHSD / DEOH / NHPD Supervision Spot Check Tool -</span>
-                <span class="blackBox" style="float: right; ">v0.20</span>
+                <span class="blackBox" style="float: right; ">v0.30</span>
                 <span class="h4" style="font-size: 140%; float: center; " >Community</span>
                 
             </div>
@@ -149,11 +149,11 @@
                                 
             <div> 
 
-                <table class="table_generic ">
+                <table class="table_generic" >
                     <tr>
-                        <td style="width: 6.50in; border-right: none;" ><span>Check the date on the original supervision tool from the visit to the CHA you are currently interviewing, and whether the tool was filled out by Ministry of Health representatives or County Health Team representatives. Ask the CHA if a team from the MOH or CHT came to interview them on that date, and mark the answer in the appropriate bubble.</span></td>
+                        <td style="width: 6.50in; border-right: none; border-bottom: none; font-style: italic; " ><span>Check the date on the original supervision tool from the visit to the CHA you are currently interviewing, and whether the tool was filled out by Ministry of Health representatives or County Health Team representatives. Ask the CHA if a team from the MOH or CHT came to interview them on that date, and mark the answer in the appropriate bubble. If the CHA does not know the exact date they were supervised, ask them if the supervision happened in the past one or two weeks, and write in the answer here.</span></td>
                                         
-                        <td style="width: 0.75in; padding: 0px; margin: 0px; border-left: none;" >
+                        <td style="width: 0.75in; padding: 0px; margin: 0px; border-left: none; border-bottom: none; " >
 
                             <table style="width: 0.75in; border: none; " >
 
@@ -181,9 +181,18 @@
                     </tr>
 
                 </table>
-
+                
+                <table class="table_generic">
+                    <tr>
+                        <td style="width: 7.25in; height: 25px; border-top: none;" >
+                            <input class="stored" name="visit_verification_answer" style="border: none; border-bottom: 1px solid black; width:6.50in; height: 23px; margin: 2px; padding: 3px; " >
+                        </td>
+                    </tr>
+                    
+                </table>
+                
             </div>
-            
+                
             <!-- White line spacers -->
             <div style="height:15px"></div>
                        
@@ -193,6 +202,34 @@
                 <br>
                 <span style="font-style: italic; font-size: 90%; ">Conduct on the spot verification with the CHA and his/her supply box.</span>
             </div>
+            
+            <!-- White line spacers -->
+            <div style="height: 5px"></div>
+                                
+            <div> 
+
+                <table class="table_generic ">
+                    <tr>
+                        <td style="width: 6.50in; border-right: none;" ><span>Has the CHA been restocked in the past 2 weeks?</span></td>
+                                        
+                        <td style="width: 0.75in; padding: 0px; margin: 0px; border-left: none;" >
+
+                            <table style="width: 0.75in; border: none; " >
+
+                                <tr>  
+                                    <td style="width: 0.05in; border: none;             text-align: center; "></td>
+                                    <td style="width: 0.40in; border: none;             text-align: center; ">(Y/N)</td>
+                                    <td style="width: 0.30in; border: 2px solid black;  text-align: center; "><input class="stored" name="cha_restock_two_week"  data-lmd-valid-restrict data-lmd-valid-autoC='["Y","y","N","n"]' style="height: 21px; width: 0.23in; padding: 3px; border: none; text-align: center; " ></td> 
+                                </tr>                             
+
+                            </table>                                
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>  
             
             <!-- White line spacers -->
             <div style="height: 5px"></div>
@@ -312,7 +349,26 @@
                             <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
                             <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input class="stored" name="supply_artesunate_100_mg_suppository_stock_out_year"      data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
                         </tr>
-                                       
+                                                             
+                        <!-- Split supply chain table up here.  Continue page on 2. -->  
+                    
+                    </table>
+
+                </div>
+                <!-- END: Supply Chain Table -->
+                                                
+            </div>
+                           
+        </div>
+        <!-- END: PAGE 1 -->
+  
+        <!-- START: PAGE 2 -->
+        <div class="page">
+        
+            <!-- START: Supply Chain Table.  Continued from page 1. -->
+            <div>   
+                <table class="table_supply_chain">
+                                                                  
                         <!-- 3.2.i -->
                         <tr>                       
                             <td class="column_2_supply_chain" style="width: 3.75in;" ><span style="padding-left: 3px; ">Amoxicillin 250 mg dispersible tablet</span><span style=" float: right; padding-right: 3px; " >(Y/N)</span></td>                       
@@ -384,26 +440,7 @@
                             <td class="column_8_supply_chain" style="width: 0.45in;text-align: center; "  >Year</td>
                             <td class="column_9_supply_chain" style="width: 0.45in;border: 2px solid black; " ><input   class="stored" name="supply_dispensing_bag_stock_out_year"   data-lmd-valid-intMin="2017" data-lmd-valid-intMax="2030" style="height: 20px; width: 0.38in; padding: 1px; border: none; text-align: center; " ></td>                     
                         </tr>
-                                            
-                        <!-- Split supply chain table up here.  Continue page on 2. -->  
-                    
-                    </table>
-
-                </div>
-                <!-- END: Supply Chain Table -->
-                                                
-            </div>
-                           
-        </div>
-        <!-- END: PAGE 1 -->
-  
-        <!-- START: PAGE 2 -->
-        <div class="page">
-        
-            <!-- START: Supply Chain Table.  Continued from page 1. -->
-            <div>   
-                <table class="table_supply_chain">
-                                                     
+               
                     <!-- 3.2.o -->
                       <tr>
                         
@@ -531,13 +568,13 @@
             <!-- START: M&E Box -->  
             <div id="meBox">
                 <span class="blackBox">M&E</span>
-                <span class="blackBox">SCF0.20</span>
+                <span class="blackBox">SCC0.30</span>
                 &nbsp;
                 DE Initials:    <input class="stored" name="meta_de_init" style="width: 0.70in; text-align: center; " data-lmd-valid-required>
                 DE Date:        <input class="stored" name="meta_de_date" style="width: 0.78in; text-align: center; ">
                 QA Initials:    <input class="stored" name="meta_qa_init" style="width: 0.35in; text-align: center; ">
                 QA Date:        <input class="stored" name="meta_qa_date" style="width: 0.78in; text-align: center; ">
-                <input name='meta_form_version' class='stored' type='hidden' value='0.2'>
+                <input name='meta_form_version' class='stored' type='hidden' value='0.3'>
             </div>
             <!-- START: M&E Box -->   
                            
