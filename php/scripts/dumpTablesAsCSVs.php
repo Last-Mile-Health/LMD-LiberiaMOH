@@ -38,6 +38,11 @@ $query3 = "SELECT $columnHeaders UNION SELECT * FROM `$schema`.`$table`;";
 //    INTO OUTFILE '" . "/home/liberiadata/public_html" . "/LMDLiberiaMOH/backups/CSVs/$table" . ".csv'
 //    FIELDS TERMINATED BY ',' ENCLOSED BY '\\\"' LINES TERMINATED BY '\\n';";
 
+// Memory buffer is hitting this limit: Allowed memory size of 33554432 bytes exhausted (tried to allocate 32 bytes)
+// Set memory_limit to -1, which means unlimited.
+
+ini_set('memory_limit', '-1');
+
 // Run query
 $result = mysqli_query($cxn, $query3) or die(mysqli_error($cxn));
 
